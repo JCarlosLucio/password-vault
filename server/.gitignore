@@ -3,3 +3,6 @@
 
 # misc
 .env
+
+#build
+/build
