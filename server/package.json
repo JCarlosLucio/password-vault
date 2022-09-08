@@ -1,8 +1,9 @@
 {
-  "name": "server",
-  "version": "1.0.0",
+  "name": "@password-vault/server",
+  "version": "0.0.1",
   "description": "Server for password vault",
   "main": "index.js",
+  "private": false,
   "scripts": {
     "dev": "tsnd --exit-child --transpile-only src/main.ts",
     "start": "node build/main.js",
