@@ -7,8 +7,7 @@
   "scripts": {
     "dev": "tsnd --exit-child --transpile-only src/main.ts",
     "start": "node build/main.js",
-    "type-check": "tsc",
-    "build": "yarn type-check"
+    "build": "tsc"
   },
   "keywords": [
     "fastify"
