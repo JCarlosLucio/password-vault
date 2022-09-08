@@ -1,9 +1,9 @@
 {
-  "name": "@password-vault/server",
-  "version": "0.0.1",
+  "name": "server",
+  "version": "0.0.0",
   "description": "Server for password vault",
   "main": "index.js",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "tsnd --exit-child --transpile-only src/main.ts",
     "start": "node build/main.js",
@@ -18,6 +18,7 @@
   "devDependencies": {
     "@types/node": "^18.7.14",
     "ts-node-dev": "^2.0.0",
+    "eslint": "8.23.0",
     "typescript": "^4.8.2"
   },
   "dependencies": {
