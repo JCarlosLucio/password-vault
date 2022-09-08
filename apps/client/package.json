@@ -1,8 +1,8 @@
 {
-  "name": "@password-vault/client",
-  "version": "0.0.1",
+  "name": "client",
+  "version": "0.0.0",
   "description": "Client for password vault",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,14 +12,18 @@
   "dependencies": {
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "ui": "*"
   },
   "devDependencies": {
-    "@types/node": "18.7.14",
+    "@babel/core": "^7.0.0",
+    "eslint": "8.23.0",
+    "eslint-config-custom": "*",
+    "next-transpile-modules": "9.0.0",
+    "tsconfig": "*",
+    "@types/node": "18.7.16",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
-    "eslint": "8.23.0",
-    "eslint-config-next": "12.2.5",
     "typescript": "4.8.2"
   }
 }
