@@ -8,6 +8,7 @@
     "dev": "tsnd --exit-child --transpile-only src/main.ts",
     "start": "node dist/main.js",
     "build": "tsc",
+    "test": "echo \"Server tests\"",
     "lint": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore"
   },
   "keywords": [
