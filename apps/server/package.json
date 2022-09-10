@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "tsnd --exit-child --transpile-only src/main.ts",
     "start": "node dist/main.js",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore"
   },
   "keywords": [
     "fastify"
