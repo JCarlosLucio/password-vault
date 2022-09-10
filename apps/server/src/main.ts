@@ -17,7 +17,7 @@ const opts: RouteShorthandOptions = {
   },
 };
 
-server.get('/ping', opts, async (request, reply) => {
+server.get('/ping', opts, async (_request, _reply) => {
   return { pong: 'it worked!' };
 });
 
