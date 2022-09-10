@@ -1,9 +1,0 @@
-# dependencies
-/node_modules
-
-# misc
-.env
-
-#build
-/build
-/dist

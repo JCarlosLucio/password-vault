@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "test": "echo \"Client tests\"",
-    "lint": "eslint ./src --ext .ts,.tsx --quiet --fix --ignore-path ./.gitignore"
+    "lint": "eslint ./src --ext .ts,.tsx --quiet --fix"
   },
   "dependencies": {
     "next": "12.2.5",
