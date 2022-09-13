@@ -1,17 +1,7 @@
 import Fastify, { FastifyInstance } from 'fastify';
 
 const createServer = () => {
-  const app: FastifyInstance = Fastify({
-    logger: {
-      transport: {
-        target: 'pino-pretty',
-        options: {
-          translateTime: 'HH:MM:ss Z',
-          ignore: 'pid,hostname',
-        },
-      },
-    },
-  });
+  const app: FastifyInstance = Fastify();
 
   return app;
 };
