@@ -1,36 +1,14 @@
-import Fastify, { FastifyInstance, RouteShorthandOptions } from 'fastify';
+import createServer from './utils/createServer';
 
-const server: FastifyInstance = Fastify({});
-
-const opts: RouteShorthandOptions = {
-  schema: {
-    response: {
-      200: {
-        type: 'object',
-        properties: {
-          pong: {
-            type: 'string',
-          },
-        },
-      },
-    },
-  },
-};
-
-server.get('/ping', opts, async (_request, _reply) => {
-  return { pong: 'it worked!' };
-});
-
-const start = async () => {
+const main = async () => {
+  const app = createServer();
   try {
-    await server.listen({ port: 3001 });
-
-    const address = server.server.address();
-    const port = typeof address === 'string' ? address : address?.port;
+    const url = await app.listen({ port: 4000, host: '0.0.0.0' });
+    app.log.info(`Server is ready at ${url}`);
   } catch (err) {
-    server.log.error(err);
+    app.log.error(err);
     process.exit(1);
   }
 };
 
-start();
+main();
