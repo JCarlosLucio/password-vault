@@ -1,12 +1,13 @@
 import createServer from './utils/createServer';
+import logger from './utils/logger';
 
 const main = async () => {
   const app = createServer();
   try {
     const url = await app.listen({ port: 4000, host: '0.0.0.0' });
-    app.log.info(`Server is ready at ${url}`);
+    logger.info(`Server is ready at ${url}`);
   } catch (err) {
-    app.log.error(err);
+    logger.error(err);
     process.exit(1);
   }
 };
