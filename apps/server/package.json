@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@fastify/cors": "^8.1.0",
+    "@fastify/jwt": "^6.3.2",
     "dotenv": "^16.0.2",
     "fastify": "^4.5.3",
     "mongoose": "^6.6.0",
