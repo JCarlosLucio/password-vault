@@ -52,6 +52,8 @@ module.exports = {
     'simple-import-sort/exports': 'error',
     //import
     'import/no-named-as-default': 'off',
+    //turbo
+    'turbo/no-undeclared-env-vars': 'off',
   },
   ignorePatterns: [
     '**/*.js',
