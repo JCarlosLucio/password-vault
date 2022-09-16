@@ -1,36 +1,36 @@
-import Fastify, { FastifyInstance, RouteShorthandOptions } from 'fastify';
+import { FastifyInstance } from 'fastify';
 
-const server: FastifyInstance = Fastify({});
+import { PORT } from './constants';
+import createServer from './utils/createServer';
+import { connectToDb, disconnectFromDb } from './utils/db';
+import logger from './utils/logger';
 
-const opts: RouteShorthandOptions = {
-  schema: {
-    response: {
-      200: {
-        type: 'object',
-        properties: {
-          pong: {
-            type: 'string',
-          },
-        },
-      },
-    },
-  },
+const gracefulShutdown = (signal: string, app: FastifyInstance) => {
+  process.on(signal, async () => {
+    app.close();
+    await disconnectFromDb();
+    logger.info(`Goodbye, got signal ${signal}`);
+    process.exit(0);
+  });
 };
 
-server.get('/ping', opts, async (_request, _reply) => {
-  return { pong: 'it worked!' };
-});
+const main = async () => {
+  const app = createServer();
 
-const start = async () => {
   try {
-    await server.listen({ port: 3001 });
-
-    const address = server.server.address();
-    const port = typeof address === 'string' ? address : address?.port;
+    const url = await app.listen({ port: PORT, host: '0.0.0.0' });
+    await connectToDb();
+    logger.info(`Server is ready at ${url}`);
   } catch (err) {
-    server.log.error(err);
+    logger.error(err);
     process.exit(1);
+  }
+
+  const signals = ['SIGTERM', 'SIGINT'];
+
+  for (const signal of signals) {
+    gracefulShutdown(signal, app);
   }
 };
 
-start();
+main();
