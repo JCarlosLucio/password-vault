@@ -1,3 +1,4 @@
+import cookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import jwt from '@fastify/jwt';
 import Fastify, { FastifyInstance } from 'fastify';
@@ -30,6 +31,10 @@ const createServer = () => {
       cookieName: 'token',
       signed: false,
     },
+  });
+
+  app.register(cookie, {
+    parseOptions: {},
   });
 
   return app;
