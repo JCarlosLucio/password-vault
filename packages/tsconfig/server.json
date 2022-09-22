@@ -7,6 +7,7 @@
     "noEmit": false,
     "module": "commonjs",
     "sourceMap": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false
   }
 }
