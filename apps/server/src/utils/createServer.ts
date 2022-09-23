@@ -10,6 +10,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 
 import { CORS_ORIGIN } from '../constants';
+import userRoutes from '../modules/user/user.routes';
 import logger from './logger';
 
 const createServer = () => {
@@ -57,6 +58,8 @@ const createServer = () => {
       }
     },
   );
+
+  app.register(userRoutes, { prefix: 'api/users' });
 
   return app;
 };
