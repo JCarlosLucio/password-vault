@@ -22,6 +22,8 @@
     "server#build": {
       "dependsOn": [
         "^build",
+        "$NODE_ENV",
+        "$COOKIE_DOMAIN",
         "$CORS_ORIGIN",
         "$DATABASE_URL",
         "$PORT"
