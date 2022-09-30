@@ -1,9 +1,17 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useState } from 'react';
 
+import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
+import Vault from '../components/Vault';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
+  const [step, setStep] = useState<'login' | 'register' | 'vault'>('register');
+
+  const [vaultKey, setVaultKey] = useState('');
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,9 +24,11 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        {step === 'register' && (
+          <RegisterForm setStep={setStep} setVaultKey={setVaultKey} />
+        )}
+        {step === 'login' && <LoginForm />}
+        {step === 'vault' && <Vault />}
       </main>
     </div>
   );
