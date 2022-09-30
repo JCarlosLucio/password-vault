@@ -6,12 +6,22 @@ import {
   Heading,
   Input,
 } from '@chakra-ui/react';
+import { useMutation } from '@tanstack/react-query';
+import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { hashPassword } from '../utils/crypto';
+import { registerUser } from '../api';
+import { generateVaultKey, hashPassword } from '../utils/crypto';
+import { storeVault, storeVaultKey } from '../utils/storage';
 import FormWrapper from './FormWrapper';
 
-const RegisterForm = () => {
+const RegisterForm = ({
+  setStep,
+  setVaultKey,
+}: {
+  setStep: Dispatch<SetStateAction<'register' | 'vault' | 'login'>>;
+  setVaultKey: Dispatch<SetStateAction<string>>;
+}) => {
   const {
     handleSubmit,
     register,
@@ -20,13 +30,30 @@ const RegisterForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<{ email: string; password: string; hashedPassword: string }>();
 
+  const mutation = useMutation(registerUser, {
+    onSuccess: ({ salt, vault }) => {
+      const hashedPassword = getValues('hashedPassword');
+      const email = getValues('email');
+      const vaultKey = generateVaultKey({ email, hashedPassword, salt });
+      storeVaultKey(vaultKey);
+      setVaultKey(vaultKey);
+      storeVault('');
+      setStep('vault');
+    },
+  });
+
   return (
     <FormWrapper
       onSubmit={handleSubmit(() => {
+        const email = getValues('email');
         const password = getValues('password');
         const hashedPassword = hashPassword(password);
 
         setValue('hashedPassword', hashedPassword);
+        mutation.mutate({
+          email,
+          hashedPassword,
+        });
       })}
     >
       <Heading>Register</Heading>
