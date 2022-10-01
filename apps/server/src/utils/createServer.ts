@@ -11,6 +11,7 @@ import path from 'path';
 
 import { CORS_ORIGIN } from '../constants';
 import userRoutes from '../modules/user/user.routes';
+import vaultRoutes from '../modules/vault/vault.routes';
 import logger from './logger';
 
 declare module 'fastify' {
@@ -73,6 +74,7 @@ const createServer = () => {
   );
 
   app.register(userRoutes, { prefix: 'api/users' });
+  app.register(vaultRoutes, { prefix: 'api/vault' });
 
   return app;
 };
