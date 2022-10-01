@@ -13,6 +13,19 @@ import { CORS_ORIGIN } from '../constants';
 import userRoutes from '../modules/user/user.routes';
 import logger from './logger';
 
+declare module 'fastify' {
+  export interface FastifyInstance {
+    authenticate: (
+      request: FastifyRequest<{
+        Body: {
+          encryptedVault: string;
+        };
+      }>,
+      reply: FastifyReply,
+    ) => Promise<never>;
+  }
+}
+
 const createServer = () => {
   const app: FastifyInstance = Fastify();
 
