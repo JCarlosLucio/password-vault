@@ -6,10 +6,11 @@ import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import Vault from '../components/Vault';
 import styles from '../styles/Home.module.css';
+import { VaultItem } from '../utils/types';
 
 const Home: NextPage = () => {
   const [step, setStep] = useState<'login' | 'register' | 'vault'>('register');
-
+  const [vault, setVault] = useState<VaultItem[]>([]);
   const [vaultKey, setVaultKey] = useState('');
 
   return (
