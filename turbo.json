@@ -10,6 +10,28 @@
         ".next/**"
       ]
     },
+    "client#build": {
+      "dependsOn": [
+        "^build",
+        "$NEXT_PUBLIC_API_ENDPOINT"
+      ],
+      "outputs": [
+        ".next/**"
+      ]
+    },
+    "server#build": {
+      "dependsOn": [
+        "^build",
+        "$NODE_ENV",
+        "$COOKIE_DOMAIN",
+        "$CORS_ORIGIN",
+        "$DATABASE_URL",
+        "$PORT"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
     "test": {},
     "lint": {
       "outputs": []
@@ -17,8 +39,5 @@
     "dev": {
       "cache": false
     }
-  },
-  "globalDependencies": [
-    ".env"
-  ]
+  }
 }

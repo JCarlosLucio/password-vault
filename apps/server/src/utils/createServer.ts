@@ -10,7 +10,22 @@ import { readFileSync } from 'fs';
 import path from 'path';
 
 import { CORS_ORIGIN } from '../constants';
+import userRoutes from '../modules/user/user.routes';
+import vaultRoutes from '../modules/vault/vault.routes';
 import logger from './logger';
+
+declare module 'fastify' {
+  export interface FastifyInstance {
+    authenticate: (
+      request: FastifyRequest<{
+        Body: {
+          encryptedVault: string;
+        };
+      }>,
+      reply: FastifyReply,
+    ) => Promise<never>;
+  }
+}
 
 const createServer = () => {
   const app: FastifyInstance = Fastify();
@@ -57,6 +72,9 @@ const createServer = () => {
       }
     },
   );
+
+  app.register(userRoutes, { prefix: 'api/users' });
+  app.register(vaultRoutes, { prefix: 'api/vault' });
 
   return app;
 };
