@@ -15,7 +15,11 @@ const Vault = ({
   vault: VaultItem[];
   vaultKey: string;
 }) => {
-  const { control, register, handleSubmit } = useForm();
+  const { control, register, handleSubmit } = useForm({
+    defaultValues: {
+      vault,
+    },
+  });
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'vault',
