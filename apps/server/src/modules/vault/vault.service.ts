@@ -13,3 +13,7 @@ export const updateVault = ({
 }) => {
   return VaultModel.updateOne({ user: userId }, { data });
 };
+
+export const findVault = (userId: string) => {
+  return VaultModel.findOne({ user: userId });
+};
