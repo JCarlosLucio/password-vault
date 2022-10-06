@@ -1,6 +1,6 @@
 import { FastifyError, FastifyInstance, FastifyPluginOptions } from 'fastify';
 
-import { registerUserHandler } from './user.controller';
+import { loginHandler, registerUserHandler } from './user.controller';
 
 const userRoutes = (
   app: FastifyInstance,
@@ -9,6 +9,9 @@ const userRoutes = (
 ) => {
   // /api/users
   app.post('/', registerUserHandler);
+
+  // /api/users/login
+  app.post('/login', loginHandler);
 
   done();
 };
