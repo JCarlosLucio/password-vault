@@ -1,8 +1,8 @@
 import { VaultModel } from './vault.model';
 
-export function createVault(input: { user: string; salt: string }) {
+export const createVault = (input: { user: string; salt: string }) => {
   return VaultModel.create(input);
-}
+};
 
 export const updateVault = ({
   userId,
