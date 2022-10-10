@@ -13,13 +13,16 @@ import { useForm } from 'react-hook-form';
 import { loginUser } from '../api';
 import { generateVaultKey, hashPassword } from '../utils/crypto';
 import { storeVault, storeVaultKey } from '../utils/storage';
+import { VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
 
 const LoginForm = ({
   setStep,
+  setVault,
   setVaultKey,
 }: {
   setStep: Dispatch<SetStateAction<'register' | 'vault' | 'login'>>;
+  setVault: Dispatch<SetStateAction<VaultItem[]>>;
   setVaultKey: Dispatch<SetStateAction<string>>;
 }) => {
   const {

@@ -43,7 +43,11 @@ const Home: NextPage = () => {
           <RegisterForm setStep={setStep} setVaultKey={setVaultKey} />
         )}
         {step === 'login' && (
-          <LoginForm setStep={setStep} setVaultKey={setVaultKey} />
+          <LoginForm
+            setStep={setStep}
+            setVaultKey={setVaultKey}
+            setVault={setVault}
+          />
         )}
         {step === 'vault' && <Vault vault={vault} vaultKey={vaultKey} />}
       </main>
