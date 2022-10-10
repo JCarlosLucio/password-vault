@@ -11,7 +11,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { loginUser } from '../api';
-import { generateVaultKey, hashPassword } from '../utils/crypto';
+import { decryptVault, generateVaultKey, hashPassword } from '../utils/crypto';
 import { storeVault, storeVaultKey } from '../utils/storage';
 import { VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
@@ -40,8 +40,10 @@ const LoginForm = ({
       const vaultKey = generateVaultKey({ email, hashedPassword, salt });
       storeVaultKey(vaultKey);
       setVaultKey(vaultKey);
-      // TODO: decrypt vault
-      storeVault('');
+      const decryptedVault = decryptVault({ vault, vaultKey });
+
+      setVault(decryptedVault);
+      storeVault(JSON.stringify(decryptedVault));
       setStep('vault');
     },
   });
