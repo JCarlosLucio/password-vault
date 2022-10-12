@@ -11,10 +11,7 @@ export const storeVault = (vault: string) => {
 
 export const loadVaultKey = (): string | null => {
   const storedVaultKey = window.sessionStorage.getItem(VAULT_KEY_STORAGE_KEY);
-  if (storedVaultKey) {
-    return JSON.parse(storedVaultKey);
-  }
-  return null;
+  return storedVaultKey;
 };
 
 export const loadVault = (): VaultItem[] | null => {
