@@ -75,7 +75,7 @@ const Vault = ({
                 placeholder="Password"
                 name={`vault.${index}.password`}
                 register={register}
-                registerOptions={{ required: 'Password is required' }}
+                rules={{ required: 'Password is required' }}
               />
             </FormControl>
 
