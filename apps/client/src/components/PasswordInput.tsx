@@ -1,22 +1,30 @@
-import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputProps,
+  InputRightElement,
+} from '@chakra-ui/react';
 import { useState } from 'react';
-import { FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form';
+import {
+  FieldValues,
+  Path,
+  RegisterOptions,
+  UseFormRegister,
+} from 'react-hook-form';
 
-interface PasswordInputProps {
-  id: string;
-  name: string;
-  placeholder?: string;
-  register: UseFormRegister<FieldValues>;
-  registerOptions?: RegisterOptions;
-}
+type PasswordInputProps<TFormValues extends FieldValues> = {
+  name: Path<TFormValues>;
+  register: UseFormRegister<TFormValues>;
+  rules?: RegisterOptions;
+} & Omit<InputProps, 'name'>;
 
-const PasswordInput = ({
-  id,
+const PasswordInput = <TFormValues extends Record<string, unknown>>({
   name,
-  placeholder = 'Password',
   register,
-  registerOptions,
-}: PasswordInputProps) => {
+  rules,
+  ...props
+}: PasswordInputProps<TFormValues>) => {
   const [show, setShow] = useState<boolean>(false);
 
   const handleClick = () => setShow(!show);
@@ -25,10 +33,9 @@ const PasswordInput = ({
     <InputGroup size="md">
       <Input
         pr="4.5rem"
-        id={id}
-        placeholder={placeholder}
+        {...props}
         type={show ? 'text' : 'password'}
-        {...register(name, registerOptions)}
+        {...register(name, rules)}
       />
       <InputRightElement width="4.5rem">
         <Button h="1.75rem" size="sm" onClick={handleClick}>
