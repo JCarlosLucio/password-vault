@@ -7,6 +7,7 @@ import { encryptVault } from '../utils/crypto';
 import { storeVault } from '../utils/storage';
 import { VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
+import PasswordInput from './PasswordInput';
 
 const Vault = ({
   vault = [],
@@ -20,6 +21,7 @@ const Vault = ({
       vault,
     },
   });
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'vault',
@@ -68,13 +70,12 @@ const Vault = ({
 
             <FormControl ml="2">
               <FormLabel htmlFor="password">Password</FormLabel>
-              <Input
-                type="password"
+              <PasswordInput
                 id="password"
                 placeholder="Password"
-                {...register(`vault.${index}.password`, {
-                  required: 'Password is required',
-                })}
+                name={`vault.${index}.password`}
+                register={register}
+                rules={{ required: 'Password is required' }}
               />
             </FormControl>
 

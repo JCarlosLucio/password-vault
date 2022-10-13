@@ -15,6 +15,7 @@ import { decryptVault, generateVaultKey, hashPassword } from '../utils/crypto';
 import { storeVault, storeVaultKey } from '../utils/storage';
 import { VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
+import PasswordInput from './PasswordInput';
 
 const LoginForm = ({
   setStep,
@@ -83,17 +84,18 @@ const LoginForm = ({
 
       <FormControl mt="4">
         <FormLabel htmlFor="password">Password</FormLabel>
-        <Input
+        <PasswordInput
           id="password"
           placeholder="Password"
-          type="password"
-          {...register('password', {
+          name="password"
+          register={register}
+          rules={{
             required: 'Password is required',
             minLength: {
               value: 6,
               message: 'Password must be at least 6 characters long',
             },
-          })}
+          }}
         />
         <FormErrorMessage>
           {errors.password && errors.password.message}
