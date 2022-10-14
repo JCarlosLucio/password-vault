@@ -1,5 +1,5 @@
 import {
-  Button,
+  IconButton,
   Input,
   InputGroup,
   InputProps,
@@ -12,6 +12,7 @@ import {
   RegisterOptions,
   UseFormRegister,
 } from 'react-hook-form';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 type PasswordInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>;
@@ -37,10 +38,13 @@ const PasswordInput = <TFormValues extends Record<string, unknown>>({
         type={show ? 'text' : 'password'}
         {...register(name, rules)}
       />
-      <InputRightElement width="4.5rem">
-        <Button h="1.75rem" size="sm" onClick={handleClick}>
-          {show ? 'Hide' : 'Show'}
-        </Button>
+      <InputRightElement>
+        <IconButton
+          onClick={handleClick}
+          size="sm"
+          aria-label={show ? 'Hide password' : 'Show password'}
+          icon={show ? <FaRegEyeSlash /> : <FaRegEye />}
+        />
       </InputRightElement>
     </InputGroup>
   );
