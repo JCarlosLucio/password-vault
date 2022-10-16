@@ -8,7 +8,7 @@
     "dev": "tsnd --exit-child --transpile-only src/main.ts",
     "start": "node dist/main.js",
     "build": "tsc",
-    "test": "echo \"Server tests\"",
+    "test": "vitest run",
     "lint": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix"
   },
   "keywords": [
@@ -21,6 +21,7 @@
     "eslint": "8.23.0",
     "eslint-config-custom": "*",
     "pino-pretty": "^9.1.0",
+    "supertest": "^6.3.0",
     "ts-node-dev": "^2.0.0",
     "tsconfig": "*",
     "typescript": "^4.8.2",
