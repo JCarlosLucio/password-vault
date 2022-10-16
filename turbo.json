@@ -32,7 +32,9 @@
         "dist/**"
       ]
     },
-    "test": {},
+    "test": {
+      "outputs": []
+    },
     "lint": {
       "outputs": []
     },
