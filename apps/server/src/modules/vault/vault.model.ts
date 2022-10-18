@@ -6,10 +6,10 @@ export class Vault {
   @prop({ required: true, ref: () => User })
   user: Ref<User>;
 
-  @prop({ default: '' })
+  @prop({ type: () => String, default: '' })
   data: string;
 
-  @prop({ required: true })
+  @prop({ type: () => String, required: true })
   salt: string;
 }
 
