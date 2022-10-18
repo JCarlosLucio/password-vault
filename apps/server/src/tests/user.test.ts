@@ -60,6 +60,25 @@ describe('Users', () => {
       expect(props).toContain('vault');
       expect(props).toContain('salt');
     });
+
+    test('should set cookie with token', async () => {
+      const newUser = {
+        email: 'test@test.com',
+        hashedPassword: 'hashedPassword',
+      };
+
+      const response = await supertest(app.server)
+        .post('/api/users')
+        .send(newUser)
+        .expect('set-cookie', /token=(.+?); Domain=(.+?); Path=\/; HttpOnly/)
+        .expect(201)
+        .expect('Content-Type', /application\/json/);
+
+      const { accessToken } = response.body;
+      const tokenCookie = response.headers['set-cookie'][0].split('; ')[0];
+
+      expect(tokenCookie).toBe(`token=${accessToken}`);
+    });
   });
 });
 
