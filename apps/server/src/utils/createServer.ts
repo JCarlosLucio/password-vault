@@ -1,5 +1,6 @@
 import cookie from '@fastify/cookie';
 import cors from '@fastify/cors';
+import helmet from '@fastify/helmet';
 import jwt from '@fastify/jwt';
 import Fastify, {
   FastifyInstance,
@@ -29,6 +30,8 @@ declare module 'fastify' {
 
 const createServer = () => {
   const app: FastifyInstance = Fastify();
+
+  app.register(helmet);
 
   app.register(cors, {
     origin: CORS_ORIGIN,
