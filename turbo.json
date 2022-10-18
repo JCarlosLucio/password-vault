@@ -26,6 +26,7 @@
         "$COOKIE_DOMAIN",
         "$CORS_ORIGIN",
         "$DATABASE_URL",
+        "$TEST_DATABASE_URL",
         "$PORT"
       ],
       "outputs": [
