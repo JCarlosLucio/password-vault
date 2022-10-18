@@ -11,10 +11,10 @@ import * as argon2 from 'argon2';
   }
 })
 export class User {
-  @prop({ required: true, unique: true })
+  @prop({ type: () => String, required: true, unique: true })
   email: string;
 
-  @prop({ required: true })
+  @prop({ type: () => String, required: true })
   password: string;
 }
 

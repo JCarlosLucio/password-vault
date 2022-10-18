@@ -73,6 +73,9 @@ const createServer = () => {
     },
   );
 
+  app.get('/ping', async () => {
+    return 'pong';
+  });
   app.register(userRoutes, { prefix: 'api/users' });
   app.register(vaultRoutes, { prefix: 'api/vault' });
 
