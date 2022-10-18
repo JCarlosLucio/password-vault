@@ -1,5 +1,12 @@
 import supertest from 'supertest';
-import { afterAll, beforeAll, beforeEach, describe, test } from 'vitest';
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  test,
+} from 'vitest';
 
 import { UserModel } from '../modules/user/user.model';
 import createServer from '../utils/createServer';
@@ -22,7 +29,7 @@ describe('Users', () => {
       await supertest(app.server).get('/ping').expect(200);
     });
 
-    test('should succed with status 201', async () => {
+    test('should succeed with status 201', async () => {
       const newUser = {
         email: 'test@test.com',
         hashedPassword: 'hashedPassword',
@@ -33,6 +40,44 @@ describe('Users', () => {
         .send(newUser)
         .expect(201)
         .expect('Content-Type', /application\/json/);
+    });
+
+    test('should return accessToken, vault, and salt after register', async () => {
+      const newUser = {
+        email: 'test@test.com',
+        hashedPassword: 'hashedPassword',
+      };
+
+      const response = await supertest(app.server)
+        .post('/api/users')
+        .send(newUser)
+        .expect(201)
+        .expect('Content-Type', /application\/json/);
+
+      const props = Object.keys(response.body);
+
+      expect(props).toContain('accessToken');
+      expect(props).toContain('vault');
+      expect(props).toContain('salt');
+    });
+
+    test('should set cookie with token', async () => {
+      const newUser = {
+        email: 'test@test.com',
+        hashedPassword: 'hashedPassword',
+      };
+
+      const response = await supertest(app.server)
+        .post('/api/users')
+        .send(newUser)
+        .expect('set-cookie', /token=(.+?); Domain=(.+?); Path=\/; HttpOnly/)
+        .expect(201)
+        .expect('Content-Type', /application\/json/);
+
+      const { accessToken } = response.body;
+      const tokenCookie = response.headers['set-cookie'][0].split('; ')[0];
+
+      expect(tokenCookie).toBe(`token=${accessToken}`);
     });
   });
 });
