@@ -31,6 +31,7 @@
   "dependencies": {
     "@fastify/cookie": "^8.1.0",
     "@fastify/cors": "^8.1.0",
+    "@fastify/helmet": "^10.0.2",
     "@fastify/jwt": "^6.3.2",
     "@typegoose/typegoose": "^9.12.1",
     "argon2": "^0.29.1",
