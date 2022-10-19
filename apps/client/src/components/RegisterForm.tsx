@@ -1,13 +1,16 @@
 import {
   Button,
+  Divider,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
   Heading,
   Input,
+  Text,
 } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, MouseEvent, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { registerUser } from '../api';
@@ -42,6 +45,8 @@ const RegisterForm = ({
       setStep('vault');
     },
   });
+
+  const goToLogin = (_e: MouseEvent<HTMLButtonElement>) => setStep('login');
 
   return (
     <FormWrapper
@@ -98,9 +103,21 @@ const RegisterForm = ({
         </FormErrorMessage>
       </FormControl>
 
-      <Button type="submit" isLoading={isSubmitting}>
-        Register
-      </Button>
+      <Flex direction="column" mt="4">
+        <Button type="submit" isLoading={isSubmitting}>
+          Register
+        </Button>
+      </Flex>
+
+      <Flex direction="column" alignItems="start" gap="4" mt="5">
+        <Divider mt="6" mb="6" />
+        <Text fontSize="md" as="b">
+          Already have an account?
+        </Text>
+        <Button variant="outline" onClick={goToLogin}>
+          Login
+        </Button>
+      </Flex>
     </FormWrapper>
   );
 };
