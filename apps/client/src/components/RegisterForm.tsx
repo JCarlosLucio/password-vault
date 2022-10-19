@@ -38,7 +38,7 @@ const RegisterForm = ({
       const vaultKey = generateVaultKey({ email, hashedPassword, salt });
       storeVaultKey(vaultKey);
       setVaultKey(vaultKey);
-      storeVault('');
+      storeVault(JSON.stringify(vault));
       setStep('vault');
     },
   });
