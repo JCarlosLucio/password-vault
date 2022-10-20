@@ -11,6 +11,7 @@
     "start": "turbo run start",
     "dev": "turbo run dev --parallel",
     "test": "turbo run test",
+    "test:e2e": "npx playwright test",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install"
