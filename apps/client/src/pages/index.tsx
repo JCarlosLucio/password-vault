@@ -10,7 +10,7 @@ import { loadVault, loadVaultKey } from '../utils/storage';
 import { VaultItem } from '../utils/types';
 
 const Home: NextPage = () => {
-  const [step, setStep] = useState<'login' | 'register' | 'vault'>('login');
+  const [step, setStep] = useState<'login' | 'register' | 'vault'>('register');
   const [vault, setVault] = useState<VaultItem[]>([]);
   const [vaultKey, setVaultKey] = useState('');
 
