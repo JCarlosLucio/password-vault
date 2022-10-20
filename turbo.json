@@ -42,7 +42,6 @@
     },
     "test:e2e": {
       "dependsOn": [
-        "lint",
         "build"
       ],
       "env": [
@@ -57,6 +56,10 @@
       "cache": false
     },
     "start": {
+      "dependsOn": [
+        "lint",
+        "build"
+      ],
       "cache": false
     }
   }
