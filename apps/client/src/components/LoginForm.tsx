@@ -76,6 +76,7 @@ const LoginForm = ({
         <Input
           id="email"
           placeholder="Email"
+          data-test="email-input"
           {...register('email', {
             required: 'Email is required',
             minLength: {
@@ -95,6 +96,7 @@ const LoginForm = ({
           id="password"
           placeholder="Password"
           name="password"
+          data-test="password-input"
           register={register}
           rules={{
             required: 'Password is required',
@@ -110,7 +112,7 @@ const LoginForm = ({
       </FormControl>
 
       <Flex direction="column" mt="4">
-        <Button type="submit" isLoading={isSubmitting}>
+        <Button type="submit" data-test="login-btn" isLoading={isSubmitting}>
           Login
         </Button>
       </Flex>
