@@ -69,7 +69,7 @@ const RegisterForm = ({
         <Input
           id="email"
           placeholder="Email"
-          data-test="email-input"
+          data-testid="email-input"
           {...register('email', {
             required: 'Email is required',
             minLength: {
@@ -90,7 +90,7 @@ const RegisterForm = ({
           id="password"
           placeholder="Password"
           name="password"
-          data-test="password-input"
+          data-testid="password-input"
           register={register}
           rules={{
             required: 'Password is required',
@@ -106,7 +106,11 @@ const RegisterForm = ({
       </FormControl>
 
       <Flex direction="column" mt="4">
-        <Button type="submit" data-test="register-btn" isLoading={isSubmitting}>
+        <Button
+          type="submit"
+          data-testid="register-btn"
+          isLoading={isSubmitting}
+        >
           Register
         </Button>
       </Flex>
