@@ -39,3 +39,8 @@ certs
 
 # turbo
 .turbo
+
+# playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/

@@ -5,10 +5,11 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "tsnd --exit-child --transpile-only src/main.ts",
-    "start": "node dist/src/main.js",
+    "dev": "cross-env NODE_ENV=development tsnd --exit-child --transpile-only src/main.ts",
+    "start": "cross-env NODE_ENV=production node dist/src/main.js",
+    "start:test": "cross-env NODE_ENV=test node dist/src/main.js",
     "build": "tsc",
-    "test": "vitest run",
+    "test": "cross-env NODE_ENV=test vitest run",
     "lint": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix"
   },
   "keywords": [
@@ -18,6 +19,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.7.14",
+    "cross-env": "^7.0.3",
     "eslint": "8.23.0",
     "eslint-config-custom": "*",
     "pino-pretty": "^9.1.0",

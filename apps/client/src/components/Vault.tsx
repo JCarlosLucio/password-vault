@@ -1,4 +1,13 @@
-import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Text,
+} from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 import { useFieldArray, useForm } from 'react-hook-form';
 
@@ -42,6 +51,12 @@ const Vault = ({
         mutation.mutate({ encryptedVault });
       })}
     >
+      <Heading>Vault</Heading>
+
+      {fields.length < 1 && (
+        <Text my="8">Your vault is empty. Maybe Add something?</Text>
+      )}
+
       {fields.map((field, index) => {
         return (
           <Box key={field.id} display="flex" alignItems="flex-end" my="4">
@@ -92,16 +107,17 @@ const Vault = ({
           </Box>
         );
       })}
+      <Flex justifyContent="space-between" mt="4">
+        <Button
+          onClick={() => append({ website: '', username: '', password: '' })}
+        >
+          Add
+        </Button>
 
-      <Button
-        onClick={() => append({ website: '', username: '', password: '' })}
-      >
-        Add
-      </Button>
-
-      <Button ml="2" bg="teal.500" type="submit">
-        Save Vault
-      </Button>
+        <Button bg="teal.500" type="submit">
+          Save Vault
+        </Button>
+      </Flex>
     </FormWrapper>
   );
 };
