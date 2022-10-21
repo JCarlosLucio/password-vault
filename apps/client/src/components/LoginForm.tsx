@@ -120,7 +120,7 @@ const LoginForm = ({
       <Flex direction="column" alignItems="start" gap="4" mt="5">
         <Divider mt="6" mb="6" />
         <Text fontSize="md" as="b">
-          Already have an account?
+          Don&apos;t have an account?
         </Text>
         <Button variant="outline" onClick={goToRegister}>
           Register
