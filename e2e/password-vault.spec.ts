@@ -20,9 +20,9 @@ test.describe('Register', () => {
   test('should register user with valid email and password', async ({
     page,
   }) => {
-    await page.locator('data-test=email-input').fill(TEST_USER.email);
-    await page.locator('data-test=password-input').fill(TEST_USER.password);
-    await page.locator('data-test=register-btn').click();
+    await page.getByTestId('email-input').fill(TEST_USER.email);
+    await page.getByTestId('password-input').fill(TEST_USER.password);
+    await page.getByTestId('register-btn').click();
     await expect(page.getByRole('heading')).toHaveText('Vault');
   });
 });
