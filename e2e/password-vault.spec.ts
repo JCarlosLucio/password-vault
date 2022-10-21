@@ -26,3 +26,12 @@ test.describe('Register', () => {
     await expect(page.getByRole('heading')).toHaveText('Vault');
   });
 });
+
+test.describe('Login', () => {
+  test('should go to Login page when pressing "Login" in Register page', async ({
+    page,
+  }) => {
+    await page.getByTestId('go-to-login-btn').click();
+    await expect(page.getByRole('heading')).toHaveText('Login');
+  });
+});
