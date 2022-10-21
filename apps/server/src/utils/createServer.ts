@@ -10,7 +10,8 @@ import Fastify, {
 import { readFileSync } from 'fs';
 import path from 'path';
 
-import { CORS_ORIGIN } from '../constants';
+import { CORS_ORIGIN, IS_TESTING } from '../constants';
+import testingRoutes from '../modules/testing/testing.routes';
 import userRoutes from '../modules/user/user.routes';
 import vaultRoutes from '../modules/vault/vault.routes';
 import logger from './logger';
@@ -81,6 +82,10 @@ const createServer = () => {
   });
   app.register(userRoutes, { prefix: 'api/users' });
   app.register(vaultRoutes, { prefix: 'api/vault' });
+
+  if (IS_TESTING) {
+    app.register(testingRoutes, { prefix: 'api/testing' });
+  }
 
   return app;
 };
