@@ -13,3 +13,5 @@ export const IS_PRODUCTION = process.env.NODE_ENV === 'production' || false;
 export const DATABASE_URL =
   (IS_PRODUCTION ? process.env.DATABASE_URL : process.env.TEST_DATABASE_URL) ||
   '';
+
+export const IS_TESTING = process.env.NODE_ENV === 'test';
