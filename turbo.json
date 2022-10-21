@@ -61,6 +61,13 @@
         "build"
       ],
       "cache": false
+    },
+    "start:test": {
+      "dependsOn": [
+        "lint",
+        "build"
+      ],
+      "cache": false
     }
   }
 }
