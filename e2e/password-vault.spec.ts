@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/'); // http://localhost:3000
+test.beforeEach(async ({ page, request }) => {
+  await request.post('http://localhost:4000/api/testing/reset'); // Reset db for testing
+
+  await page.goto('/'); // http://localhost:3000/
 });
 
 const TEST_USER = {
