@@ -50,6 +50,15 @@ test.describe('Login', () => {
     await expect(page.getByRole('heading')).toHaveText('Login');
   });
 
+  test('should go back to Register page when pressing "Register" in Login page', async ({
+    page,
+  }) => {
+    await page.getByTestId('go-to-login-btn').click();
+    await expect(page.getByRole('heading')).toHaveText('Login');
+    await page.getByTestId('go-to-register-btn').click();
+    await expect(page.getByRole('heading')).toHaveText('Register');
+  });
+
   test('should login user with valid email and password', async ({ page }) => {
     await page.getByTestId('go-to-login-btn').click();
     await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
