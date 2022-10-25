@@ -122,7 +122,11 @@ const LoginForm = ({
         <Text fontSize="md" as="b">
           Don&apos;t have an account?
         </Text>
-        <Button variant="outline" onClick={goToRegister}>
+        <Button
+          variant="outline"
+          data-testid="go-to-register-btn"
+          onClick={goToRegister}
+        >
           Register
         </Button>
       </Flex>
