@@ -20,15 +20,13 @@ import { VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
 import PasswordInput from './PasswordInput';
 
-const LoginForm = ({
-  setStep,
-  setVault,
-  setVaultKey,
-}: {
+interface LoginFormProps {
   setStep: Dispatch<SetStateAction<'register' | 'vault' | 'login'>>;
   setVault: Dispatch<SetStateAction<VaultItem[]>>;
   setVaultKey: Dispatch<SetStateAction<string>>;
-}) => {
+}
+
+const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
   const {
     handleSubmit,
     register,
