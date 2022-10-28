@@ -18,13 +18,12 @@ import { VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
 import PasswordInput from './PasswordInput';
 
-const Vault = ({
-  vault = [],
-  vaultKey = '',
-}: {
+interface VaultProps {
   vault: VaultItem[];
   vaultKey: string;
-}) => {
+}
+
+const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
   const { control, register, handleSubmit } = useForm({
     defaultValues: {
       vault,
