@@ -9,13 +9,11 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react';
-import { useMutation } from '@tanstack/react-query';
 import { Dispatch, MouseEvent, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { registerUser } from '../api';
-import { generateVaultKey, hashPassword } from '../utils/crypto';
-import { storeVault, storeVaultKey } from '../utils/storage';
+import useRegister from '../hooks/useRegister';
+import { hashPassword } from '../utils/crypto';
 import FormWrapper from './FormWrapper';
 import PasswordInput from './PasswordInput';
 
@@ -30,19 +28,12 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
     register,
     getValues,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<{ email: string; password: string; hashedPassword: string }>();
 
-  const mutation = useMutation(registerUser, {
-    onSuccess: ({ salt, vault }) => {
-      const hashedPassword = getValues('hashedPassword');
-      const email = getValues('email');
-      const vaultKey = generateVaultKey({ email, hashedPassword, salt });
-      storeVaultKey(vaultKey);
-      setVaultKey(vaultKey);
-      storeVault(JSON.stringify(vault));
-      setStep('vault');
-    },
+  const { register: registerUser, isLoading } = useRegister({
+    setStep,
+    setVaultKey,
   });
 
   const goToLogin = (_e: MouseEvent<HTMLButtonElement>) => setStep('login');
@@ -55,7 +46,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
         const hashedPassword = hashPassword(password);
 
         setValue('hashedPassword', hashedPassword);
-        mutation.mutate({
+        registerUser({
           email,
           hashedPassword,
         });
@@ -105,11 +96,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
       </FormControl>
 
       <Flex direction="column" mt="4">
-        <Button
-          type="submit"
-          data-testid="register-btn"
-          isLoading={isSubmitting}
-        >
+        <Button type="submit" data-testid="register-btn" isLoading={isLoading}>
           Register
         </Button>
       </Flex>
