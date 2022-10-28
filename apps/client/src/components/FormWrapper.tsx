@@ -1,10 +1,9 @@
 import { Box, BoxProps } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-const FormWrapper = ({
-  children,
-  ...props
-}: { children: ReactNode } & BoxProps) => {
+type FormWrapperProps = { children: ReactNode } & BoxProps;
+
+const FormWrapper = ({ children, ...props }: FormWrapperProps) => {
   return (
     <Box w="100%" maxW="container.sm" boxShadow="xl" p="8" as="form" {...props}>
       {children}
