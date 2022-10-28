@@ -7,24 +7,27 @@ export const generateSalt = () => {
   return crypto.randomBytes(64).toString('hex');
 };
 
-export function createUser(input: { hashedPassword: string; email: string }) {
+export const createUser = (input: {
+  hashedPassword: string;
+  email: string;
+}) => {
   return UserModel.create({
     email: input.email,
     password: input.hashedPassword,
   });
-}
+};
 
 const genHash = (password: string) => {
   return argon2.hash(password);
 };
 
-export async function findUserByEmailAndPassword({
+export const findUserByEmailAndPassword = async ({
   email,
   hashedPassword,
 }: {
   email: string;
   hashedPassword: string;
-}) {
+}) => {
   const user = await UserModel.findOne({ email });
 
   const hash = await genHash(hashedPassword);
@@ -34,4 +37,4 @@ export async function findUserByEmailAndPassword({
   }
 
   return user;
-}
+};

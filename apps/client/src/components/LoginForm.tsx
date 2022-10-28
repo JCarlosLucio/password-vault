@@ -9,66 +9,40 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react';
-import { useMutation } from '@tanstack/react-query';
 import { Dispatch, MouseEvent, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
+import useLogin from 'src/hooks/useLogin';
 
-import { loginUser } from '../api';
-import { decryptVault, generateVaultKey, hashPassword } from '../utils/crypto';
-import { storeVault, storeVaultKey } from '../utils/storage';
+import { hashPassword } from '../utils/crypto';
 import { VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
 import PasswordInput from './PasswordInput';
 
-const LoginForm = ({
-  setStep,
-  setVault,
-  setVaultKey,
-}: {
+interface LoginFormProps {
   setStep: Dispatch<SetStateAction<'register' | 'vault' | 'login'>>;
   setVault: Dispatch<SetStateAction<VaultItem[]>>;
   setVaultKey: Dispatch<SetStateAction<string>>;
-}) => {
+}
+
+const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
   const {
     handleSubmit,
     register,
-    getValues,
-    setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<{ email: string; password: string; hashedPassword: string }>();
 
-  const mutation = useMutation(loginUser, {
-    onSuccess: ({ salt, vault }) => {
-      const hashedPassword = getValues('hashedPassword');
-      const email = getValues('email');
-      const vaultKey = generateVaultKey({ email, hashedPassword, salt });
-      storeVaultKey(vaultKey);
-      setVaultKey(vaultKey);
-      const decryptedVault = decryptVault({ vault, vaultKey });
-
-      setVault(decryptedVault);
-      storeVault(JSON.stringify(decryptedVault));
-      setStep('vault');
-    },
-  });
+  const { login, isLoading } = useLogin({ setStep, setVault, setVaultKey });
 
   const goToRegister = (_e: MouseEvent<HTMLButtonElement>) =>
     setStep('register');
 
-  return (
-    <FormWrapper
-      onSubmit={handleSubmit(() => {
-        const email = getValues('email');
-        const password = getValues('password');
-        const hashedPassword = hashPassword(password);
+  const onSubmit = (formData: { email: string; password: string }) => {
+    const hashedPassword = hashPassword(formData.password);
+    login({ email: formData.email, hashedPassword });
+  };
 
-        setValue('hashedPassword', hashedPassword);
-        mutation.mutate({
-          email,
-          hashedPassword,
-        });
-      })}
-    >
+  return (
+    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
       <Heading>Login</Heading>
 
       <FormControl mt="4">
@@ -112,7 +86,7 @@ const LoginForm = ({
       </FormControl>
 
       <Flex direction="column" mt="4">
-        <Button type="submit" data-testid="login-btn" isLoading={isSubmitting}>
+        <Button type="submit" data-testid="login-btn" isLoading={isLoading}>
           Login
         </Button>
       </Flex>

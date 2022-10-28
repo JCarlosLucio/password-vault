@@ -4,7 +4,7 @@ import { loginHandler, registerUserHandler } from './user.controller';
 
 const userRoutes = (
   app: FastifyInstance,
-  opts: FastifyPluginOptions,
+  _opts: FastifyPluginOptions,
   done: (e?: FastifyError) => void,
 ) => {
   // /api/users

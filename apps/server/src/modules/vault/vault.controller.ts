@@ -4,14 +4,14 @@ import _ from 'lodash';
 import logger from '../../utils/logger';
 import { updateVault } from './vault.service';
 
-export async function updateVaultHandler(
+export const updateVaultHandler = async (
   request: FastifyRequest<{
     Body: {
       encryptedVault: string;
     };
   }>,
   reply: FastifyReply,
-) {
+) => {
   const userId = _.get(request, 'user._id');
 
   try {
@@ -25,4 +25,4 @@ export async function updateVaultHandler(
     logger.error(e, 'error updating vault');
     return reply.code(500).send(e);
   }
-}
+};
