@@ -8,10 +8,9 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react';
-import { useMutation } from '@tanstack/react-query';
 import { useFieldArray, useForm } from 'react-hook-form';
+import useSaveVault from 'src/hooks/useSaveVault';
 
-import { saveVault } from '../api';
 import { encryptVault } from '../utils/crypto';
 import { storeVault } from '../utils/storage';
 import { VaultItem } from '../utils/types';
@@ -35,7 +34,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
     name: 'vault',
   });
 
-  const mutation = useMutation(saveVault);
+  const { save, isLoading } = useSaveVault();
 
   return (
     <FormWrapper
@@ -47,7 +46,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
 
         storeVault(JSON.stringify(vault));
 
-        mutation.mutate({ encryptedVault });
+        save({ encryptedVault });
       })}
     >
       <Heading>Vault</Heading>
@@ -113,7 +112,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
           Add
         </Button>
 
-        <Button bg="teal.500" type="submit">
+        <Button bg="teal.500" type="submit" isLoading={isLoading}>
           Save Vault
         </Button>
       </Flex>
