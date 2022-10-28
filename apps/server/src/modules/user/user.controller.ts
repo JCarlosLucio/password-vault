@@ -9,10 +9,10 @@ import {
   generateSalt,
 } from './user.service';
 
-export async function registerUserHandler(
+export const registerUserHandler = async (
   request: FastifyRequest<{ Body: Parameters<typeof createUser>[number] }>,
   reply: FastifyReply,
-) {
+) => {
   const body = request.body;
 
   try {
@@ -40,14 +40,14 @@ export async function registerUserHandler(
     logger.error(e, 'error creating user');
     return reply.code(500).send(e);
   }
-}
+};
 
-export async function loginHandler(
+export const loginHandler = async (
   request: FastifyRequest<{
     Body: Parameters<typeof findUserByEmailAndPassword>[number];
   }>,
   reply: FastifyReply,
-) {
+) => {
   const body = request.body;
 
   try {
@@ -81,4 +81,4 @@ export async function loginHandler(
     logger.error(e, 'error login user');
     return reply.code(500).send(e);
   }
-}
+};
