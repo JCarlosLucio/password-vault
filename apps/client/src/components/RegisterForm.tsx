@@ -26,8 +26,6 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
   const {
     handleSubmit,
     register,
-    getValues,
-    setValue,
     formState: { errors },
   } = useForm<{ email: string; password: string; hashedPassword: string }>();
 
@@ -38,20 +36,13 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
 
   const goToLogin = (_e: MouseEvent<HTMLButtonElement>) => setStep('login');
 
-  return (
-    <FormWrapper
-      onSubmit={handleSubmit(() => {
-        const email = getValues('email');
-        const password = getValues('password');
-        const hashedPassword = hashPassword(password);
+  const onSubmit = (formData: { email: string; password: string }) => {
+    const hashedPassword = hashPassword(formData.password);
+    registerUser({ email: formData.email, hashedPassword });
+  };
 
-        setValue('hashedPassword', hashedPassword);
-        registerUser({
-          email,
-          hashedPassword,
-        });
-      })}
-    >
+  return (
+    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
       <Heading>Register</Heading>
 
       <FormControl mt="4">
