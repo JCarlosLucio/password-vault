@@ -19,13 +19,12 @@ import { storeVault, storeVaultKey } from '../utils/storage';
 import FormWrapper from './FormWrapper';
 import PasswordInput from './PasswordInput';
 
-const RegisterForm = ({
-  setStep,
-  setVaultKey,
-}: {
+interface RegisterFormProps {
   setStep: Dispatch<SetStateAction<'register' | 'vault' | 'login'>>;
   setVaultKey: Dispatch<SetStateAction<string>>;
-}) => {
+}
+
+const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
   const {
     handleSubmit,
     register,
