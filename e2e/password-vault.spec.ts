@@ -29,7 +29,7 @@ test.beforeEach(async ({ page, request }) => {
 test.describe('Register', () => {
   test('should show Password Vault in title and Register', async ({ page }) => {
     await expect(page).toHaveTitle(/Password Vault/);
-    await expect(page.getByRole('heading')).toHaveText('Register');
+    await expect(page.getByTestId('form-heading')).toHaveText('Register');
   });
 
   test('should register user with valid email and password', async ({
@@ -38,7 +38,7 @@ test.describe('Register', () => {
     await page.getByTestId('email-input').fill(TEST_USER.email);
     await page.getByTestId('password-input').fill(TEST_USER.password);
     await page.getByTestId('register-btn').click();
-    await expect(page.getByRole('heading')).toHaveText('Vault');
+    await expect(page.getByTestId('vault-heading')).toHaveText('Vault');
   });
 });
 
@@ -47,16 +47,16 @@ test.describe('Login', () => {
     page,
   }) => {
     await page.getByTestId('go-to-login-btn').click();
-    await expect(page.getByRole('heading')).toHaveText('Login');
+    await expect(page.getByTestId('form-heading')).toHaveText('Login');
   });
 
   test('should go back to Register page when pressing "Register" in Login page', async ({
     page,
   }) => {
     await page.getByTestId('go-to-login-btn').click();
-    await expect(page.getByRole('heading')).toHaveText('Login');
+    await expect(page.getByTestId('form-heading')).toHaveText('Login');
     await page.getByTestId('go-to-register-btn').click();
-    await expect(page.getByRole('heading')).toHaveText('Register');
+    await expect(page.getByTestId('form-heading')).toHaveText('Register');
   });
 
   test('should login user with valid email and password', async ({ page }) => {
@@ -64,6 +64,6 @@ test.describe('Login', () => {
     await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
     await page.getByTestId('password-input').fill(TEST_LOGIN_USER.password);
     await page.getByTestId('login-btn').click();
-    await expect(page.getByRole('heading')).toHaveText('Vault');
+    await expect(page.getByTestId('vault-heading')).toHaveText('Vault');
   });
 });
