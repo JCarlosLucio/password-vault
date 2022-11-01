@@ -31,6 +31,22 @@ const theme = extendTheme({
         }),
       },
     },
+    Button: {
+      variants: {
+        gradient: (props: StyleFunctionProps) => ({
+          bgGradient: mode(
+            'linear(to-r, orange.400, red.500, orange.300)',
+            'linear(to-r, yellow.400, orange.500, yellow.400)',
+          )(props),
+          color: 'black',
+          transition: '500ms',
+          bgSize: '200% 100%',
+          _hover: {
+            backgroundPosition: 'right center',
+          },
+        }),
+      },
+    },
   },
   config,
 });
