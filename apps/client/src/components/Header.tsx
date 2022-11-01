@@ -13,8 +13,20 @@ const Header = () => {
       mx="10"
       gap={[1, 5]}
     >
-      <Icon as={RiShieldKeyholeFill} boxSize={[14, 16]} />
-      <Heading as="h1" size={['2xl', '3xl']} textAlign="center">
+      <Icon
+        as={RiShieldKeyholeFill}
+        boxSize={[14, 16]}
+        color="orange.300"
+        _dark={{ color: 'yellow.400' }}
+      />
+
+      <Heading
+        as="h1"
+        size={['2xl', '3xl']}
+        textAlign="center"
+        fontSize="6xl"
+        variant="gradient"
+      >
         Password Vault
       </Heading>
     </Flex>
