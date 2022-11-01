@@ -86,7 +86,12 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
       </FormControl>
 
       <Flex direction="column" mt="4">
-        <Button type="submit" data-testid="login-btn" isLoading={isLoading}>
+        <Button
+          type="submit"
+          variant="gradient"
+          data-testid="login-btn"
+          isLoading={isLoading}
+        >
           Login
         </Button>
       </Flex>
