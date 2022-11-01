@@ -1,11 +1,12 @@
+import { Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
+import Header from '../components/Header';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import Vault from '../components/Vault';
-import styles from '../styles/Home.module.css';
 import { loadVault, loadVaultKey } from '../utils/storage';
 import { VaultItem } from '../utils/types';
 
@@ -28,7 +29,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <Flex direction="column" justify="center" align="center">
       <Head>
         <title>Password Vault</title>
         <meta
@@ -37,8 +38,17 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
+      <Header />
+      <Flex
+        as="main"
+        my="4"
+        mx="4"
+        maxW="100%"
+        w={['100%', '50%']}
+        direction="column"
+        justify="center"
+        align="center"
+      >
         {step === 'register' && (
           <RegisterForm setStep={setStep} setVaultKey={setVaultKey} />
         )}
@@ -50,8 +60,8 @@ const Home: NextPage = () => {
           />
         )}
         {step === 'vault' && <Vault vault={vault} vaultKey={vaultKey} />}
-      </main>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 

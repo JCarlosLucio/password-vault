@@ -43,7 +43,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-      <Heading>Register</Heading>
+      <Heading data-testid="form-heading">Register</Heading>
 
       <FormControl mt="4">
         <FormLabel htmlFor="email">Email</FormLabel>
@@ -87,7 +87,12 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
       </FormControl>
 
       <Flex direction="column" mt="4">
-        <Button type="submit" data-testid="register-btn" isLoading={isLoading}>
+        <Button
+          type="submit"
+          variant="gradient"
+          data-testid="register-btn"
+          isLoading={isLoading}
+        >
           Register
         </Button>
       </Flex>
