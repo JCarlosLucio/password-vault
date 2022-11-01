@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Box height="100%">
+    <Flex direction="column" justify="center" align="center">
       <Head>
         <title>Password Vault</title>
         <meta
@@ -39,7 +39,16 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Flex as="main" py="4" direction="column" justify="center" align="center">
+      <Flex
+        as="main"
+        my="4"
+        mx="4"
+        maxW="100%"
+        w={['100%', '50%']}
+        direction="column"
+        justify="center"
+        align="center"
+      >
         {step === 'register' && (
           <RegisterForm setStep={setStep} setVaultKey={setVaultKey} />
         )}
@@ -52,7 +61,7 @@ const Home: NextPage = () => {
         )}
         {step === 'vault' && <Vault vault={vault} vaultKey={vaultKey} />}
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
