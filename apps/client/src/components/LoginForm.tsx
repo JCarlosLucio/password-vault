@@ -43,7 +43,7 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-      <Heading>Login</Heading>
+      <Heading data-testid="form-heading">Login</Heading>
 
       <FormControl mt="4">
         <FormLabel htmlFor="email">Email</FormLabel>

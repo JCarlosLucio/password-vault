@@ -43,7 +43,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-      <Heading>Register</Heading>
+      <Heading data-testid="form-heading">Register</Heading>
 
       <FormControl mt="4">
         <FormLabel htmlFor="email">Email</FormLabel>
