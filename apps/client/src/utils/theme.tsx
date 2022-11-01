@@ -8,6 +8,16 @@ const config: ThemeConfig = {
 };
 
 const theme = extendTheme({
+  styles: {
+    global: (props: StyleFunctionProps) => ({
+      body: {
+        fontFamily: 'body',
+        color: mode('black', 'whiteAlpha.900')(props),
+        bg: mode('gray.100', 'black')(props),
+        lineHeight: 'base',
+      },
+    }),
+  },
   components: {
     Heading: {
       variants: {
