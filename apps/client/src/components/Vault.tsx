@@ -49,7 +49,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
         save({ encryptedVault });
       })}
     >
-      <Heading>Vault</Heading>
+      <Heading data-testid="vault-heading">Vault</Heading>
 
       {fields.length < 1 && (
         <Text my="8">Your vault is empty. Maybe Add something?</Text>
