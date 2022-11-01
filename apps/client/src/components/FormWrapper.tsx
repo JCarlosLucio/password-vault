@@ -5,7 +5,7 @@ type FormWrapperProps = { children: ReactNode } & BoxProps;
 
 const FormWrapper = ({ children, ...props }: FormWrapperProps) => {
   return (
-    <Box w="100%" maxW="container.sm" boxShadow="xl" p="8" as="form" {...props}>
+    <Box w="100%" maxW="container.sm" p="8" as="form" {...props}>
       {children}
     </Box>
   );
