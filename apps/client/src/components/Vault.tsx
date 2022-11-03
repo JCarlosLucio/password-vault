@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Flex,
   FormControl,
@@ -57,7 +56,13 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
 
       {fields.map((field, index) => {
         return (
-          <Box key={field.id} display="flex" alignItems="flex-end" my="4">
+          <Flex
+            key={field.id}
+            direction={['column', 'row']}
+            align="flex-end"
+            my="4"
+            gap="3"
+          >
             <FormControl>
               <FormLabel htmlFor="website">Website</FormLabel>
               <Input
@@ -102,7 +107,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
             >
               -
             </Button>
-          </Box>
+          </Flex>
         );
       })}
       <Flex justifyContent="space-between" mt="4">
