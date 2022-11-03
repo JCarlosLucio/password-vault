@@ -37,6 +37,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
 
   return (
     <FormWrapper
+      maxW="container.lg"
       onSubmit={handleSubmit(({ vault }) => {
         const encryptedVault = encryptVault({
           vault: JSON.stringify({ vault }),
@@ -113,11 +114,18 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
       <Flex justifyContent="space-between" mt="4">
         <Button
           onClick={() => append({ website: '', username: '', password: '' })}
+          variant="outline"
+          size="lg"
         >
           Add
         </Button>
 
-        <Button bg="teal.500" type="submit" isLoading={isLoading}>
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          variant="gradient"
+          size="lg"
+        >
           Save Vault
         </Button>
       </Flex>
