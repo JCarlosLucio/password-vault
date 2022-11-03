@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import Header from '../components/Header';
 import LoginForm from '../components/LoginForm';
+import Nav from '../components/Nav';
 import RegisterForm from '../components/RegisterForm';
 import Vault from '../components/Vault';
 import { loadVault, loadVaultKey } from '../utils/storage';
@@ -38,7 +39,9 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+
+      {step === 'vault' ? <Nav /> : <Header />}
+
       <Flex
         as="main"
         my="4"
