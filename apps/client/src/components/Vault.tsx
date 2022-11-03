@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Flex,
   FormControl,
@@ -38,6 +37,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
 
   return (
     <FormWrapper
+      maxW="container.lg"
       onSubmit={handleSubmit(({ vault }) => {
         const encryptedVault = encryptVault({
           vault: JSON.stringify({ vault }),
@@ -57,7 +57,13 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
 
       {fields.map((field, index) => {
         return (
-          <Box key={field.id} display="flex" alignItems="flex-end" my="4">
+          <Flex
+            key={field.id}
+            direction={['column', 'row']}
+            align="flex-end"
+            my="4"
+            gap="3"
+          >
             <FormControl>
               <FormLabel htmlFor="website">Website</FormLabel>
               <Input
@@ -102,17 +108,24 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
             >
               -
             </Button>
-          </Box>
+          </Flex>
         );
       })}
       <Flex justifyContent="space-between" mt="4">
         <Button
           onClick={() => append({ website: '', username: '', password: '' })}
+          variant="outline"
+          size="lg"
         >
           Add
         </Button>
 
-        <Button bg="teal.500" type="submit" isLoading={isLoading}>
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          variant="gradient"
+          size="lg"
+        >
           Save Vault
         </Button>
       </Flex>

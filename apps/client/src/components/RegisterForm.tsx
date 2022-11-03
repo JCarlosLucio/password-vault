@@ -92,6 +92,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
           variant="gradient"
           data-testid="register-btn"
           isLoading={isLoading}
+          size="lg"
         >
           Register
         </Button>
@@ -106,6 +107,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
           variant="outline"
           data-testid="go-to-login-btn"
           onClick={goToLogin}
+          size="lg"
         >
           Login
         </Button>
