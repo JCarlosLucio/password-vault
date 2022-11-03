@@ -3,9 +3,13 @@ import { ReactNode } from 'react';
 
 type FormWrapperProps = { children: ReactNode } & BoxProps;
 
-const FormWrapper = ({ children, ...props }: FormWrapperProps) => {
+const FormWrapper = ({
+  children,
+  maxW = 'container.sm',
+  ...props
+}: FormWrapperProps) => {
   return (
-    <Box w="100%" maxW="container.lg" p="8" as="form" {...props}>
+    <Box w="100%" maxW={maxW} p="8" as="form" {...props}>
       {children}
     </Box>
   );
