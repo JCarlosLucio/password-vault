@@ -1,5 +1,6 @@
-import { Flex, Heading, Icon } from '@chakra-ui/react';
-import { RiShieldKeyholeFill } from 'react-icons/ri';
+import { Flex, Heading } from '@chakra-ui/react';
+
+import ShieldIcon from './ShieldIcon';
 
 const Header = () => {
   return (
@@ -13,12 +14,7 @@ const Header = () => {
       mx="10"
       gap={[1, 5]}
     >
-      <Icon
-        as={RiShieldKeyholeFill}
-        boxSize={[14, 16]}
-        color="orange.300"
-        _dark={{ color: 'yellow.400' }}
-      />
+      <ShieldIcon boxSize={[14, 16]} />
 
       <Heading
         as="h1"
