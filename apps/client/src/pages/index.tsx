@@ -32,7 +32,7 @@ const Home: NextPage = () => {
   return (
     <Flex direction="column" justify="flex-start" align="center">
       <Head>
-        <title>Password Vault</title>
+        <title>🔒 Password Vault</title>
         <meta
           name="description"
           content="A password vault for all your passwords"
