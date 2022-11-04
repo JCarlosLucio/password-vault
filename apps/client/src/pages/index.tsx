@@ -45,8 +45,8 @@ const Home: NextPage = () => {
       <Flex
         as="main"
         my="4"
-        mx="4"
         maxW="100%"
+        overflow="hidden"
         w={['100%', '50%']}
         direction="column"
         justify="center"
