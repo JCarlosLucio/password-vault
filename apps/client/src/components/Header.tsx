@@ -14,8 +14,8 @@ const Header = () => {
       mx="10"
       gap={[1, 5]}
       as={motion.header}
-      initial={{ opacity: 0, translateY: -100 }}
-      animate={{ opacity: 1, translateY: 0 }}
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
     >
       <ShieldIcon boxSize={[14, 16]} />
       <Heading
