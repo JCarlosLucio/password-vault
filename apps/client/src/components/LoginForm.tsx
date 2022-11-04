@@ -42,7 +42,7 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+    <FormWrapper onSubmit={handleSubmit(onSubmit)} initialX={100}>
       <Heading data-testid="form-heading">Login</Heading>
 
       <FormControl mt="4">
