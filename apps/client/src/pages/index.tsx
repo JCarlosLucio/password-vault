@@ -30,7 +30,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Flex direction="column" justify="center" align="center">
+    <Flex direction="column" justify="flex-start" align="center">
       <Head>
         <title>Password Vault</title>
         <meta
