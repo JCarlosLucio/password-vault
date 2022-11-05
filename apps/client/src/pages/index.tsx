@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
+import Background from '../components/Background';
 import Header from '../components/Header';
 import LoginForm from '../components/LoginForm';
 import Nav from '../components/Nav';
@@ -64,6 +65,7 @@ const Home: NextPage = () => {
         )}
         {step === 'vault' && <Vault vault={vault} vaultKey={vaultKey} />}
       </Flex>
+      <Background />
     </Flex>
   );
 };
