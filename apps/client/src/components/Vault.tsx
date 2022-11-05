@@ -38,6 +38,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
   return (
     <FormWrapper
       maxW="container.lg"
+      mt="12"
       onSubmit={handleSubmit(({ vault }) => {
         const encryptedVault = encryptVault({
           vault: JSON.stringify({ vault }),
