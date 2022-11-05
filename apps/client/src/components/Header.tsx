@@ -22,9 +22,8 @@ const Header = () => {
       <ShieldIcon boxSize={[14, 16]} />
       <Heading
         as="h1"
-        size={['2xl', '3xl']}
+        size={['3xl', '4xl']}
         textAlign="center"
-        fontSize="6xl"
         variant="gradient"
       >
         Password Vault
