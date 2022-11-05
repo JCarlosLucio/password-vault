@@ -4,10 +4,13 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  Icon,
   Input,
   Text,
 } from '@chakra-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { FaGrinBeamSweat } from 'react-icons/fa';
 import useSaveVault from 'src/hooks/useSaveVault';
 
 import { encryptVault } from '../utils/crypto';
@@ -38,6 +41,9 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
   return (
     <FormWrapper
       maxW="container.lg"
+      mt="12"
+      pt="12"
+      overflowX="hidden"
       onSubmit={handleSubmit(({ vault }) => {
         const encryptedVault = encryptVault({
           vault: JSON.stringify({ vault }),
@@ -52,65 +58,79 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
       <Heading data-testid="vault-heading">Vault</Heading>
 
       {fields.length < 1 && (
-        <Text my="8">Your vault is empty. Maybe Add something?</Text>
+        <Flex my="12" direction="column" align="center" gap="5">
+          <Icon
+            as={FaGrinBeamSweat}
+            boxSize="16"
+            color="orange.400"
+            _dark={{ color: 'yellow.400' }}
+          />
+          <Text>Your vault is empty. Maybe Add something?</Text>
+        </Flex>
       )}
 
-      {fields.map((field, index) => {
-        return (
-          <Flex
-            key={field.id}
-            direction={['column', 'row']}
-            align="flex-end"
-            my="4"
-            gap="3"
-          >
-            <FormControl>
-              <FormLabel htmlFor="website">Website</FormLabel>
-              <Input
-                type="url"
-                id="website"
-                placeholder="Website"
-                {...register(`vault.${index}.website`, {
-                  required: 'Website is required',
-                })}
-              />
-            </FormControl>
-
-            <FormControl ml="2">
-              <FormLabel htmlFor="username">Username</FormLabel>
-              <Input
-                id="username"
-                placeholder="Username"
-                {...register(`vault.${index}.username`, {
-                  required: 'Username is required',
-                })}
-              />
-            </FormControl>
-
-            <FormControl ml="2">
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <PasswordInput
-                id="password"
-                placeholder="Password"
-                name={`vault.${index}.password`}
-                register={register}
-                rules={{ required: 'Password is required' }}
-              />
-            </FormControl>
-
-            <Button
-              bg="red.500"
-              color="white"
-              fontSize="2xl"
-              ml="2"
-              type="button"
-              onClick={() => remove(index)}
+      <AnimatePresence>
+        {fields.map((field, index) => {
+          return (
+            <Flex
+              key={field.id}
+              direction={['column', 'row']}
+              align="flex-end"
+              my="4"
+              gap="3"
+              as={motion.div}
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
             >
-              -
-            </Button>
-          </Flex>
-        );
-      })}
+              <FormControl>
+                <FormLabel htmlFor="website">Website</FormLabel>
+                <Input
+                  type="url"
+                  id="website"
+                  placeholder="Website"
+                  {...register(`vault.${index}.website`, {
+                    required: 'Website is required',
+                  })}
+                />
+              </FormControl>
+
+              <FormControl ml="2">
+                <FormLabel htmlFor="username">Username</FormLabel>
+                <Input
+                  id="username"
+                  placeholder="Username"
+                  {...register(`vault.${index}.username`, {
+                    required: 'Username is required',
+                  })}
+                />
+              </FormControl>
+
+              <FormControl ml="2">
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <PasswordInput
+                  id="password"
+                  placeholder="Password"
+                  name={`vault.${index}.password`}
+                  register={register}
+                  rules={{ required: 'Password is required' }}
+                />
+              </FormControl>
+
+              <Button
+                bg="red.500"
+                color="white"
+                fontSize="2xl"
+                ml="2"
+                type="button"
+                onClick={() => remove(index)}
+              >
+                -
+              </Button>
+            </Flex>
+          );
+        })}
+      </AnimatePresence>
       <Flex justifyContent="space-between" mt="4">
         <Button
           onClick={() => append({ website: '', username: '', password: '' })}

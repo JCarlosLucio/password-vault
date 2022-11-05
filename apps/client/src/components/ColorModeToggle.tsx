@@ -11,6 +11,7 @@ const ColorModeToggle = () => {
       aria-label={colorMode === 'light' ? 'Dark Mode' : 'Light Mode'}
       icon={colorMode === 'light' ? <FaMoon /> : <FaSun />}
       variant="ghost"
+      fontSize="lg"
     />
   );
 };

@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
+import Background from '../components/Background';
 import Header from '../components/Header';
 import LoginForm from '../components/LoginForm';
 import Nav from '../components/Nav';
@@ -30,9 +31,15 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Flex direction="column" justify="center" align="center">
+    <Flex
+      direction="column"
+      justify="flex-start"
+      align="center"
+      h="100%"
+      overflowX="hidden"
+    >
       <Head>
-        <title>Password Vault</title>
+        <title>🔒 Password Vault</title>
         <meta
           name="description"
           content="A password vault for all your passwords"
@@ -44,12 +51,11 @@ const Home: NextPage = () => {
 
       <Flex
         as="main"
-        my="4"
-        mx="4"
         maxW="100%"
-        w={['100%', '50%']}
+        w="100%"
+        h="100%"
         direction="column"
-        justify="center"
+        justify="start"
         align="center"
       >
         {step === 'register' && (
@@ -64,6 +70,7 @@ const Home: NextPage = () => {
         )}
         {step === 'vault' && <Vault vault={vault} vaultKey={vaultKey} />}
       </Flex>
+      <Background />
     </Flex>
   );
 };
