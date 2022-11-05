@@ -14,7 +14,8 @@ const Header = () => {
       px="10"
       gap={[1, 5]}
       backdropFilter="auto"
-      backdropBlur="6px"
+      backdropBlur="2px"
+      _dark={{ backdropBlur: '6px' }}
       as={motion.header}
       initial={{ opacity: 0, y: -100 }}
       animate={{ opacity: 1, y: 0 }}
