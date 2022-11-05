@@ -9,10 +9,12 @@ const Header = () => {
       justify="center"
       align="center"
       direction={['column', 'row']}
-      mt={[10, 40]}
-      mb={[1, 20]}
-      mx="10"
+      pt={[10, 40]}
+      pb={[1, 20]}
+      px="10"
       gap={[1, 5]}
+      backdropFilter="auto"
+      backdropBlur="6px"
       as={motion.header}
       initial={{ opacity: 0, y: -100 }}
       animate={{ opacity: 1, y: 0 }}
