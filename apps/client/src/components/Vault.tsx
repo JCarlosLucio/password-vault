@@ -4,11 +4,13 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  Icon,
   Input,
   Text,
 } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { FaGrinBeamSweat } from 'react-icons/fa';
 import useSaveVault from 'src/hooks/useSaveVault';
 
 import { encryptVault } from '../utils/crypto';
@@ -40,6 +42,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
     <FormWrapper
       maxW="container.lg"
       mt="12"
+      pt="12"
       overflowX="hidden"
       onSubmit={handleSubmit(({ vault }) => {
         const encryptedVault = encryptVault({
@@ -55,7 +58,15 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
       <Heading data-testid="vault-heading">Vault</Heading>
 
       {fields.length < 1 && (
-        <Text my="8">Your vault is empty. Maybe Add something?</Text>
+        <Flex my="12" direction="column" align="center" gap="5">
+          <Icon
+            as={FaGrinBeamSweat}
+            boxSize="16"
+            color="orange.400"
+            _dark={{ color: 'yellow.400' }}
+          />
+          <Text>Your vault is empty. Maybe Add something?</Text>
+        </Flex>
       )}
 
       <AnimatePresence>
