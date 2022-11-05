@@ -31,7 +31,13 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Flex direction="column" justify="flex-start" align="center">
+    <Flex
+      direction="column"
+      justify="flex-start"
+      align="center"
+      h="100%"
+      overflowX="hidden"
+    >
       <Head>
         <title>🔒 Password Vault</title>
         <meta
@@ -45,10 +51,9 @@ const Home: NextPage = () => {
 
       <Flex
         as="main"
-        my="4"
         maxW="100%"
-        overflow="hidden"
         w={['100%', '50%']}
+        h="100%"
         direction="column"
         justify="center"
         align="center"
