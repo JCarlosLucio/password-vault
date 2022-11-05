@@ -52,10 +52,10 @@ const Home: NextPage = () => {
       <Flex
         as="main"
         maxW="100%"
-        w={['100%', '50%']}
+        w="100%"
         h="100%"
         direction="column"
-        justify="center"
+        justify="start"
         align="center"
       >
         {step === 'register' && (

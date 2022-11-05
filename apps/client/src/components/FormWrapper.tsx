@@ -13,11 +13,13 @@ const FormWrapper = ({
   return (
     <Box
       w="100%"
+      h="100%"
       maxW={maxW}
       p="8"
       backdropFilter="auto"
       backdropBlur="2px"
       _dark={{ backdropBlur: '6px' }}
+      overflow="scroll"
       as={motion.form}
       initial={{ opacity: 0, x: initialX }}
       animate={{ opacity: 1, x: 0 }}
