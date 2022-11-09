@@ -58,6 +58,9 @@ const Home: NextPage = () => {
         direction="column"
         justify="start"
         align="center"
+        backdropFilter="auto"
+        backdropBlur="2px"
+        _dark={{ backdropBlur: '6px' }}
       >
         {step === 'register' && (
           <RegisterForm setStep={setStep} setVaultKey={setVaultKey} />
