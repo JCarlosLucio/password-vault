@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Background from '../components/Background';
 import Header from '../components/Header';
 import LoginForm from '../components/LoginForm';
+import MadeBy from '../components/MadeBy';
 import Nav from '../components/Nav';
 import RegisterForm from '../components/RegisterForm';
 import Vault from '../components/Vault';
@@ -70,6 +71,9 @@ const Home: NextPage = () => {
         )}
         {step === 'vault' && <Vault vault={vault} vaultKey={vaultKey} />}
       </Flex>
+
+      <MadeBy />
+
       <Background />
     </Flex>
   );
