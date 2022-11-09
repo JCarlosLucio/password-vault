@@ -13,6 +13,7 @@ const Header = () => {
       pb={[1, 20]}
       px="10"
       gap={[1, 5]}
+      w="100%"
       backdropFilter="auto"
       backdropBlur="2px"
       _dark={{ backdropBlur: '6px' }}
