@@ -83,7 +83,7 @@ const Background = () => {
               strokeWidth="1"
             ></path>
           </g>
-          <g transform="translate(158 728)">
+          <g transform="translate(208 688)">
             <path
               d="M0 -36L31.2 -18L31.2 18L0 36L-31.2 18L-31.2 -18Z"
               stroke="#fabd60"
@@ -99,7 +99,7 @@ const Background = () => {
               strokeWidth="1"
             ></path>
           </g>
-          <g transform="translate(281 975)">
+          <g transform="translate(321 885)">
             <path
               d="M0 -100L86.6 -50L86.6 50L0 100L-86.6 50L-86.6 -50Z"
               stroke="#fabd60"
