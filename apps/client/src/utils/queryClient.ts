@@ -1,13 +1,14 @@
 import { createStandaloneToast } from '@chakra-ui/react';
 import { QueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
 const { toast } = createStandaloneToast();
 
 const queryErrorHandler = (error: unknown) => {
   let errorMessage = 'error connecting to server';
-  if (error instanceof Error) {
+  if (error instanceof AxiosError) {
     errorMessage =
-      error?.message ||
+      error?.response?.data?.message ||
       // remove the initial 'Error: ' that accompanies many errors
       error?.toString().replace(/^Error:\s*/, '');
   }
