@@ -45,7 +45,7 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
     <FormWrapper onSubmit={handleSubmit(onSubmit)} initialX={100}>
       <Heading data-testid="form-heading">Login</Heading>
 
-      <FormControl mt="4">
+      <FormControl mt="4" isInvalid={!!errors.email}>
         <FormLabel htmlFor="email">Email</FormLabel>
         <Input
           id="email"
@@ -64,7 +64,7 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
         </FormErrorMessage>
       </FormControl>
 
-      <FormControl mt="4">
+      <FormControl mt="4" isInvalid={!!errors.password}>
         <FormLabel htmlFor="password">Password</FormLabel>
         <PasswordInput
           id="password"
