@@ -45,7 +45,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
     <FormWrapper onSubmit={handleSubmit(onSubmit)} initialX={-100}>
       <Heading data-testid="form-heading">Register</Heading>
 
-      <FormControl mt="4">
+      <FormControl mt="4" isInvalid={!!errors.email}>
         <FormLabel htmlFor="email">Email</FormLabel>
         <Input
           id="email"
@@ -65,7 +65,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
         </FormErrorMessage>
       </FormControl>
 
-      <FormControl mt="4">
+      <FormControl mt="4" isInvalid={!!errors.password}>
         <FormLabel htmlFor="password">Password</FormLabel>
         <PasswordInput
           id="password"
