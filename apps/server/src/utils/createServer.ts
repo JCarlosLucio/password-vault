@@ -87,6 +87,38 @@ const createServer = () => {
     app.register(testingRoutes, { prefix: 'api/testing' });
   }
 
+  app.setErrorHandler((error, _request, reply) => {
+    logger.error(JSON.stringify(error, null, 2));
+
+    switch (error.name) {
+      case 'ValidationError': {
+        if (
+          error.message.includes('`password`') ||
+          error.message.includes('`email`')
+        ) {
+          const message = error.message.slice(error.message.indexOf('`'));
+          return reply.status(400).send({ message });
+        }
+
+        reply.status(400).send({ message: error.message });
+        break;
+      }
+      case 'MongoServerError': {
+        if (error.code.toString() === '11000') {
+          return reply.status(400).send({ message: 'Email already taken' });
+        }
+
+        reply.status(400).send({ message: error.message });
+        break;
+      }
+
+      default: {
+        reply.code(500).send(error);
+        break;
+      }
+    }
+  });
+
   return app;
 };
 
