@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 import { Dispatch, SetStateAction } from 'react';
 
@@ -13,6 +14,8 @@ interface useLoginProps {
 }
 
 const useLogin = ({ setStep, setVault, setVaultKey }: useLoginProps) => {
+  const toast = useToast();
+
   const { mutate: login, isLoading } = useMutation(loginUser, {
     onSuccess: ({ salt, vault }, { hashedPassword, email }) => {
       const vaultKey = generateVaultKey({ email, hashedPassword, salt });
@@ -23,6 +26,13 @@ const useLogin = ({ setStep, setVault, setVaultKey }: useLoginProps) => {
       setVault(decryptedVault);
       storeVault(JSON.stringify(decryptedVault));
       setStep('vault');
+
+      toast({
+        title: 'Welcome back!',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
     },
   });
 

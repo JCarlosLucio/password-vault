@@ -17,10 +17,6 @@ export const createUser = (input: {
   });
 };
 
-const genHash = (password: string) => {
-  return argon2.hash(password);
-};
-
 export const findUserByEmailAndPassword = async ({
   email,
   hashedPassword,
@@ -30,11 +26,13 @@ export const findUserByEmailAndPassword = async ({
 }) => {
   const user = await UserModel.findOne({ email });
 
-  const hash = await genHash(hashedPassword);
+  if (user) {
+    const isVerified = await argon2.verify(user.password, hashedPassword);
 
-  if (!user || !argon2.verify(user.password, hash)) {
-    return null;
+    if (isVerified) {
+      return user;
+    }
   }
 
-  return user;
+  return null;
 };

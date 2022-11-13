@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 import { Dispatch, SetStateAction } from 'react';
 
@@ -11,6 +12,8 @@ interface useRegisterProps {
 }
 
 const useRegister = ({ setStep, setVaultKey }: useRegisterProps) => {
+  const toast = useToast();
+
   const { mutate: register, isLoading } = useMutation(registerUser, {
     onSuccess: ({ salt, vault }, { hashedPassword, email }) => {
       const vaultKey = generateVaultKey({ email, hashedPassword, salt });
@@ -18,8 +21,14 @@ const useRegister = ({ setStep, setVaultKey }: useRegisterProps) => {
       setVaultKey(vaultKey);
 
       storeVault(JSON.stringify(vault));
-
       setStep('vault');
+
+      toast({
+        title: 'Welcome!',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
     },
   });
 
