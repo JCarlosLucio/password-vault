@@ -1,9 +1,21 @@
+import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 
 import { saveVault } from '../api';
 
 const useSaveVault = () => {
-  const { mutate: save, isLoading } = useMutation(saveVault);
+  const toast = useToast();
+
+  const { mutate: save, isLoading } = useMutation(saveVault, {
+    onSuccess: () => {
+      toast({
+        title: 'Vault saved!',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    },
+  });
 
   return { save, isLoading };
 };
