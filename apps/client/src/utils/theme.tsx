@@ -43,6 +43,14 @@ const theme = extendTheme({
           bgSize: '200% 100%',
           _hover: {
             backgroundPosition: 'right center',
+            _disabled: {
+              backgroundPosition: 'right center',
+              bgSize: '200% 100%',
+              bgGradient: mode(
+                'linear(to-r, orange.400, red.500, orange.300)',
+                'linear(to-r, yellow.400, orange.500, yellow.400)',
+              )(props),
+            },
           },
         }),
       },
