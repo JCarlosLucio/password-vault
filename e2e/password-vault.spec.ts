@@ -27,14 +27,18 @@ test.beforeEach(async ({ page, request }) => {
 });
 
 test.describe('Register', () => {
-  test('should show Password Vault in title and Register', async ({ page }) => {
+  test('should go to Register page when pressing "Register" in Login page', async ({
+    page,
+  }) => {
     await expect(page).toHaveTitle(/Password Vault/);
+    await page.getByTestId('go-to-register-btn').click();
     await expect(page.getByTestId('form-heading')).toHaveText('Register');
   });
 
   test('should register user with valid email and password', async ({
     page,
   }) => {
+    await page.getByTestId('go-to-register-btn').click();
     await page.getByTestId('email-input').fill(TEST_USER.email);
     await page.getByTestId('password-input').fill(TEST_USER.password);
     await page.getByTestId('register-btn').click();
@@ -43,24 +47,20 @@ test.describe('Register', () => {
 });
 
 test.describe('Login', () => {
-  test('should go to Login page when pressing "Login" in Register page', async ({
-    page,
-  }) => {
-    await page.getByTestId('go-to-login-btn').click();
+  test('should show Password Vault in title and Login', async ({ page }) => {
+    await expect(page).toHaveTitle(/Password Vault/);
     await expect(page.getByTestId('form-heading')).toHaveText('Login');
   });
 
   test('should go back to Register page when pressing "Register" in Login page', async ({
     page,
   }) => {
-    await page.getByTestId('go-to-login-btn').click();
     await expect(page.getByTestId('form-heading')).toHaveText('Login');
     await page.getByTestId('go-to-register-btn').click();
     await expect(page.getByTestId('form-heading')).toHaveText('Register');
   });
 
   test('should login user with valid email and password', async ({ page }) => {
-    await page.getByTestId('go-to-login-btn').click();
     await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
     await page.getByTestId('password-input').fill(TEST_LOGIN_USER.password);
     await page.getByTestId('login-btn').click();
