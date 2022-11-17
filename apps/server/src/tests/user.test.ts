@@ -114,6 +114,23 @@ describe('Users', () => {
 
       expect(tokenCookie).toBe(`token=${accessToken}`);
     });
+
+    test('should fail with 401 Unathorized if credentials are incorrect', async () => {
+      const incorrectCredentials = {
+        email: initialUser.email,
+        hashedPassword: 'wrong',
+      };
+
+      const response = await supertest(app.server)
+        .post(LOGIN_URL)
+        .send(incorrectCredentials)
+        .expect(401)
+        .expect('Content-Type', /application\/json/);
+
+      const message = response.body.message;
+
+      expect(message).toBe('Invalid email or password');
+    });
   });
 });
 
