@@ -11,7 +11,7 @@ import {
 import { UserModel } from '../modules/user/user.model';
 import createServer from '../utils/createServer';
 import { connectToDb, disconnectFromDb } from '../utils/db';
-import { initialUser, newUser } from './testHelper';
+import { initialUser, newUser, USERS_URL } from './testHelper';
 
 const app = createServer();
 
@@ -33,7 +33,7 @@ describe('Users', () => {
 
     test('should succeed with status 201', async () => {
       await supertest(app.server)
-        .post('/api/users')
+        .post(USERS_URL)
         .send(newUser)
         .expect(201)
         .expect('Content-Type', /application\/json/);
@@ -41,7 +41,7 @@ describe('Users', () => {
 
     test('should return accessToken, vault, and salt after register', async () => {
       const response = await supertest(app.server)
-        .post('/api/users')
+        .post(USERS_URL)
         .send(newUser)
         .expect(201)
         .expect('Content-Type', /application\/json/);
@@ -55,7 +55,7 @@ describe('Users', () => {
 
     test('should set cookie with token', async () => {
       const response = await supertest(app.server)
-        .post('/api/users')
+        .post(USERS_URL)
         .send(newUser)
         .expect('set-cookie', /token=(.+?); Domain=(.+?); Path=\/; HttpOnly/)
         .expect(201)
@@ -69,7 +69,7 @@ describe('Users', () => {
 
     test('should fail with  400 if email already taken', async () => {
       const response = await supertest(app.server)
-        .post('/api/users')
+        .post(USERS_URL)
         .send(initialUser)
         .expect(400)
         .expect('Content-Type', /application\/json/);
