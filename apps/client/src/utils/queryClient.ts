@@ -16,6 +16,7 @@ const queryErrorHandler = (error: unknown) => {
   }
 
   toast({
+    id: 'error',
     title: 'An error occurred',
     description: errorMessage,
     status: 'error',
