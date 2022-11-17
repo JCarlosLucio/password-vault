@@ -100,6 +100,20 @@ describe('Users', () => {
       expect(props).toContain('vault');
       expect(props).toContain('salt');
     });
+
+    test('should set cookie with token if credentials are correct', async () => {
+      const response = await supertest(app.server)
+        .post(LOGIN_URL)
+        .send(initialUser)
+        .expect('set-cookie', /token=(.+?); Domain=(.+?); Path=\/; HttpOnly/)
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+      const { accessToken } = response.body;
+      const tokenCookie = response.headers['set-cookie'][0].split('; ')[0];
+
+      expect(tokenCookie).toBe(`token=${accessToken}`);
+    });
   });
 });
 
