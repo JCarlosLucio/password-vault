@@ -42,6 +42,9 @@ test.describe('Register', () => {
     await page.getByTestId('email-input').fill(TEST_USER.email);
     await page.getByTestId('password-input').fill(TEST_USER.password);
     await page.getByTestId('register-btn').click();
+    await expect(page.locator('#toast-register-success')).toHaveText(
+      'Welcome!',
+    );
     await expect(page.getByTestId('vault-heading')).toHaveText('Vault');
   });
 });
