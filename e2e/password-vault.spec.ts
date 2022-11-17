@@ -86,4 +86,17 @@ test.describe('Login', () => {
     );
     await expect(page.getByTestId('vault-heading')).toHaveText('Vault');
   });
+
+  test('should fail login if incorrect credentials', async ({ page }) => {
+    await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
+    await page.getByTestId('password-input').fill('wrongpassword');
+    await page.getByTestId('login-btn').click();
+    await expect(page.locator('#toast-error-title')).toHaveText(
+      'An error occurred',
+    );
+    await expect(page.locator('#toast-error-description')).toHaveText(
+      'Invalid email or password',
+    );
+    await expect(page.getByTestId('form-heading')).toHaveText('Login');
+  });
 });
