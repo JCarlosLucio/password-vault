@@ -11,6 +11,7 @@ import {
 import { UserModel } from '../modules/user/user.model';
 import createServer from '../utils/createServer';
 import { connectToDb, disconnectFromDb } from '../utils/db';
+import { newUser } from './testHelper';
 
 const app = createServer();
 
@@ -30,11 +31,6 @@ describe('Users', () => {
     });
 
     test('should succeed with status 201', async () => {
-      const newUser = {
-        email: 'test@test.com',
-        hashedPassword: 'hashedPassword',
-      };
-
       await supertest(app.server)
         .post('/api/users')
         .send(newUser)
@@ -43,11 +39,6 @@ describe('Users', () => {
     });
 
     test('should return accessToken, vault, and salt after register', async () => {
-      const newUser = {
-        email: 'test@test.com',
-        hashedPassword: 'hashedPassword',
-      };
-
       const response = await supertest(app.server)
         .post('/api/users')
         .send(newUser)
@@ -62,11 +53,6 @@ describe('Users', () => {
     });
 
     test('should set cookie with token', async () => {
-      const newUser = {
-        email: 'test@test.com',
-        hashedPassword: 'hashedPassword',
-      };
-
       const response = await supertest(app.server)
         .post('/api/users')
         .send(newUser)
