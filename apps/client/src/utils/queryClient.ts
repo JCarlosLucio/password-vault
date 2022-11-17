@@ -2,7 +2,9 @@ import { createStandaloneToast } from '@chakra-ui/react';
 import { QueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-const { toast } = createStandaloneToast();
+import theme from './theme';
+
+export const { toast } = createStandaloneToast({ theme });
 
 const queryErrorHandler = (error: unknown) => {
   let errorMessage = 'error connecting to server';
