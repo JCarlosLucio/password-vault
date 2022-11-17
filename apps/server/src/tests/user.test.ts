@@ -8,9 +8,16 @@ import {
   test,
 } from 'vitest';
 
-import { UserModel } from '../modules/user/user.model';
 import createServer from '../utils/createServer';
 import { connectToDb, disconnectFromDb } from '../utils/db';
+import {
+  createInitialUser,
+  deleteAllUsers,
+  initialUser,
+  LOGIN_URL,
+  newUser,
+  USERS_URL,
+} from './testHelper';
 
 const app = createServer();
 
@@ -21,7 +28,8 @@ beforeAll(async () => {
 
 describe('Users', () => {
   beforeEach(async () => {
-    await UserModel.deleteMany({});
+    await deleteAllUsers();
+    await createInitialUser();
   });
 
   describe('registering a user', () => {
@@ -30,26 +38,16 @@ describe('Users', () => {
     });
 
     test('should succeed with status 201', async () => {
-      const newUser = {
-        email: 'test@test.com',
-        hashedPassword: 'hashedPassword',
-      };
-
       await supertest(app.server)
-        .post('/api/users')
+        .post(USERS_URL)
         .send(newUser)
         .expect(201)
         .expect('Content-Type', /application\/json/);
     });
 
     test('should return accessToken, vault, and salt after register', async () => {
-      const newUser = {
-        email: 'test@test.com',
-        hashedPassword: 'hashedPassword',
-      };
-
       const response = await supertest(app.server)
-        .post('/api/users')
+        .post(USERS_URL)
         .send(newUser)
         .expect(201)
         .expect('Content-Type', /application\/json/);
@@ -62,13 +60,8 @@ describe('Users', () => {
     });
 
     test('should set cookie with token', async () => {
-      const newUser = {
-        email: 'test@test.com',
-        hashedPassword: 'hashedPassword',
-      };
-
       const response = await supertest(app.server)
-        .post('/api/users')
+        .post(USERS_URL)
         .send(newUser)
         .expect('set-cookie', /token=(.+?); Domain=(.+?); Path=\/; HttpOnly/)
         .expect(201)
@@ -78,6 +71,65 @@ describe('Users', () => {
       const tokenCookie = response.headers['set-cookie'][0].split('; ')[0];
 
       expect(tokenCookie).toBe(`token=${accessToken}`);
+    });
+
+    test('should fail with  400 if email already taken', async () => {
+      const response = await supertest(app.server)
+        .post(USERS_URL)
+        .send(initialUser)
+        .expect(400)
+        .expect('Content-Type', /application\/json/);
+
+      const message = response.body.message;
+
+      expect(message).toBe('Email already taken');
+    });
+  });
+
+  describe('logging in a user', () => {
+    test('should return accessToken, vault, and salt if credentials are correct', async () => {
+      const response = await supertest(app.server)
+        .post(LOGIN_URL)
+        .send(initialUser)
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+      const props = Object.keys(response.body);
+
+      expect(props).toContain('accessToken');
+      expect(props).toContain('vault');
+      expect(props).toContain('salt');
+    });
+
+    test('should set cookie with token if credentials are correct', async () => {
+      const response = await supertest(app.server)
+        .post(LOGIN_URL)
+        .send(initialUser)
+        .expect('set-cookie', /token=(.+?); Domain=(.+?); Path=\/; HttpOnly/)
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+      const { accessToken } = response.body;
+      const tokenCookie = response.headers['set-cookie'][0].split('; ')[0];
+
+      expect(tokenCookie).toBe(`token=${accessToken}`);
+    });
+
+    test('should fail with 401 Unathorized if credentials are incorrect', async () => {
+      const incorrectCredentials = {
+        email: initialUser.email,
+        hashedPassword: 'wrong',
+      };
+
+      const response = await supertest(app.server)
+        .post(LOGIN_URL)
+        .send(incorrectCredentials)
+        .expect(401)
+        .expect('Content-Type', /application\/json/);
+
+      const message = response.body.message;
+
+      expect(message).toBe('Invalid email or password');
     });
   });
 });

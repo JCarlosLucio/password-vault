@@ -19,6 +19,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.11.5",
+    "@types/supertest": "^2.0.12",
     "cross-env": "^7.0.3",
     "eslint": "8.26.0",
     "eslint-config-custom": "*",
