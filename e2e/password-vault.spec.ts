@@ -47,6 +47,20 @@ test.describe('Register', () => {
     );
     await expect(page.getByTestId('vault-heading')).toHaveText('Vault');
   });
+
+  test('should fail register if email is taken', async ({ page }) => {
+    await page.getByTestId('go-to-register-btn').click();
+    await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
+    await page.getByTestId('password-input').fill(TEST_LOGIN_USER.password);
+    await page.getByTestId('register-btn').click();
+    await expect(page.locator('#toast-error-title')).toHaveText(
+      'An error occurred',
+    );
+    await expect(page.locator('#toast-error-description')).toHaveText(
+      'Email already taken',
+    );
+    await expect(page.getByTestId('form-heading')).toHaveText('Register');
+  });
 });
 
 test.describe('Login', () => {
