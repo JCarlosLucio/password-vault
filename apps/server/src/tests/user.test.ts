@@ -11,7 +11,7 @@ import {
 import { UserModel } from '../modules/user/user.model';
 import createServer from '../utils/createServer';
 import { connectToDb, disconnectFromDb } from '../utils/db';
-import { newUser } from './testHelper';
+import { initialUser, newUser } from './testHelper';
 
 const app = createServer();
 
@@ -23,6 +23,7 @@ beforeAll(async () => {
 describe('Users', () => {
   beforeEach(async () => {
     await UserModel.deleteMany({});
+    await UserModel.create(initialUser);
   });
 
   describe('registering a user', () => {
@@ -64,6 +65,18 @@ describe('Users', () => {
       const tokenCookie = response.headers['set-cookie'][0].split('; ')[0];
 
       expect(tokenCookie).toBe(`token=${accessToken}`);
+    });
+
+    test('should fail with  400 if email already taken', async () => {
+      const response = await supertest(app.server)
+        .post('/api/users')
+        .send(initialUser)
+        .expect(400)
+        .expect('Content-Type', /application\/json/);
+
+      const message = response.body.message;
+
+      expect(message).toBe('Email already taken');
     });
   });
 });
