@@ -9,6 +9,7 @@ const useSaveVault = () => {
   const { mutate: save, isLoading } = useMutation(saveVault, {
     onSuccess: () => {
       toast({
+        id: 'vault-saved',
         title: 'Vault saved!',
         status: 'success',
         duration: 3000,
