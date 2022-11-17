@@ -28,6 +28,7 @@ const useLogin = ({ setStep, setVault, setVaultKey }: useLoginProps) => {
       setStep('vault');
 
       toast({
+        id: 'login-success',
         title: 'Welcome back!',
         status: 'success',
         duration: 3000,
