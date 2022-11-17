@@ -67,6 +67,9 @@ test.describe('Login', () => {
     await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
     await page.getByTestId('password-input').fill(TEST_LOGIN_USER.password);
     await page.getByTestId('login-btn').click();
+    await expect(page.locator('#toast-login-success')).toHaveText(
+      'Welcome back!',
+    );
     await expect(page.getByTestId('vault-heading')).toHaveText('Vault');
   });
 });
