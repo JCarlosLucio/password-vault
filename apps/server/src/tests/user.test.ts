@@ -9,9 +9,11 @@ import {
 } from 'vitest';
 
 import { UserModel } from '../modules/user/user.model';
+import { generateSalt } from '../modules/user/user.service';
+import { VaultModel } from '../modules/vault/vault.model';
 import createServer from '../utils/createServer';
 import { connectToDb, disconnectFromDb } from '../utils/db';
-import { initialUser, newUser, USERS_URL } from './testHelper';
+import { initialUser, LOGIN_URL, newUser, USERS_URL } from './testHelper';
 
 const app = createServer();
 
@@ -23,7 +25,9 @@ beforeAll(async () => {
 describe('Users', () => {
   beforeEach(async () => {
     await UserModel.deleteMany({});
-    await UserModel.create(initialUser);
+    const user = await UserModel.create(initialUser);
+    const salt = generateSalt();
+    await VaultModel.create({ user: user._id, salt });
   });
 
   describe('registering a user', () => {
@@ -77,6 +81,22 @@ describe('Users', () => {
       const message = response.body.message;
 
       expect(message).toBe('Email already taken');
+    });
+  });
+
+  describe('logging in a user', () => {
+    test('should return accessToken, vault, and salt if credentials are correct', async () => {
+      const response = await supertest(app.server)
+        .post(LOGIN_URL)
+        .send(initialUser)
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+      const props = Object.keys(response.body);
+
+      expect(props).toContain('accessToken');
+      expect(props).toContain('vault');
+      expect(props).toContain('salt');
     });
   });
 });

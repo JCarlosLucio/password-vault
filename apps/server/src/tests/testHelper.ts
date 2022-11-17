@@ -1,5 +1,7 @@
 export const USERS_URL = '/api/users';
 
+export const LOGIN_URL = `${USERS_URL}/login`;
+
 export const newUser = {
   email: 'new@test.com',
   hashedPassword: 'hashedPassword',
