@@ -24,6 +24,7 @@ const useRegister = ({ setStep, setVaultKey }: useRegisterProps) => {
       setStep('vault');
 
       toast({
+        id: 'register-success',
         title: 'Welcome!',
         status: 'success',
         duration: 3000,
