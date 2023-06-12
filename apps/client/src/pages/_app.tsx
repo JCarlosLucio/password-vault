@@ -12,7 +12,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider
         theme={theme}
-        toastOptions={{ portalProps: 'appendToParentPortal' }}
+        toastOptions={{ portalProps: { appendToParentPortal: true } }}
       >
         <Component {...pageProps} />
       </ChakraProvider>
