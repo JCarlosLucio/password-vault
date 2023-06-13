@@ -18,11 +18,11 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@playwright/test": "^1.27.1",
+    "@playwright/test": "^1.35.0",
     "eslint-config-custom": "*",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
-    "prettier": "latest",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "2.8.8",
     "turbo": "latest"
   },
   "engines": {

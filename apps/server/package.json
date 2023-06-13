@@ -18,30 +18,30 @@
   "author": "Juan Carlos Lucio",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.11.5",
+    "@types/node": "^20.3.0",
     "@types/supertest": "^2.0.12",
     "cross-env": "^7.0.3",
-    "eslint": "8.26.0",
+    "eslint": "8.42.0",
     "eslint-config-custom": "*",
-    "pino-pretty": "^9.1.1",
-    "supertest": "^6.3.1",
+    "pino-pretty": "^10.0.0",
+    "supertest": "^6.3.3",
     "ts-node-dev": "^2.0.0",
     "tsconfig": "*",
-    "typescript": "^4.8.4",
-    "vite": "^3.1.8",
-    "vitest": "^0.24.3"
+    "typescript": "^5.1.3",
+    "vite": "^4.3.9",
+    "vitest": "^0.32.0"
   },
   "dependencies": {
     "@fastify/cookie": "^8.3.0",
-    "@fastify/cors": "^8.1.1",
-    "@fastify/helmet": "^10.0.2",
-    "@fastify/jwt": "^6.3.2",
-    "@typegoose/typegoose": "^9.12.1",
-    "argon2": "^0.30.1",
-    "dotenv": "^16.0.3",
-    "fastify": "^4.9.2",
+    "@fastify/cors": "^8.3.0",
+    "@fastify/helmet": "^10.1.1",
+    "@fastify/jwt": "^7.0.0",
+    "@typegoose/typegoose": "^11.2.0",
+    "argon2": "^0.30.3",
+    "dotenv": "^16.1.4",
+    "fastify": "^4.18.0",
     "lodash": "^4.17.21",
-    "mongoose": "^6.7.0",
-    "pino": "^8.7.0"
+    "mongoose": "^7.2.4",
+    "pino": "^8.14.1"
   }
 }
