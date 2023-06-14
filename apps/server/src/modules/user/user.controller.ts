@@ -27,12 +27,17 @@ export const registerUserHandler = async (
       email: user.email,
     });
 
+    /**
+     * If the cookie domain is in the Public Suffixes List (https://github.com/publicsuffix/list) then cookies won't be set (https://devcenter.heroku.com/articles/cookies-and-herokuapp-com).
+     * ex. herokuapp.com, onrender.com, vercel.app.
+     * This can be fixed using a custom domain.
+     */
     reply.setCookie('token', accessToken, {
       domain: COOKIE_DOMAIN,
       path: '/',
       secure: IS_PRODUCTION,
       httpOnly: true,
-      sameSite: false,
+      sameSite: 'none',
     });
 
     return reply.code(201).send({ accessToken, vault: vault.data, salt });
@@ -71,7 +76,7 @@ export const loginHandler = async (
       path: '/',
       secure: IS_PRODUCTION,
       httpOnly: true,
-      sameSite: false,
+      sameSite: 'none',
     });
 
     return reply
