@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import path from 'path';
 
 dotenv.config();
 
@@ -15,3 +16,12 @@ export const DATABASE_URL =
   '';
 
 export const IS_TESTING = process.env.NODE_ENV === 'test';
+
+// /etc/secrets is where secret files are stored when deploying with render
+export const PRIVATE_KEY_PATH = `${
+  IS_PRODUCTION ? '/etc/secrets' : path.join(process.cwd(), 'certs')
+}/private.key`;
+
+export const PUBLIC_KEY_PATH = `${
+  IS_PRODUCTION ? '/etc/secrets' : path.join(process.cwd(), 'certs')
+}/public.key`;
