@@ -8,9 +8,13 @@ import Fastify, {
   FastifyRequest,
 } from 'fastify';
 import { readFileSync } from 'fs';
-import path from 'path';
 
-import { CORS_ORIGIN, IS_TESTING } from '../constants';
+import {
+  CORS_ORIGIN,
+  IS_TESTING,
+  PRIVATE_KEY_PATH,
+  PUBLIC_KEY_PATH,
+} from '../constants';
 import testingRoutes from '../modules/testing/testing.routes';
 import userRoutes from '../modules/user/user.routes';
 import vaultRoutes from '../modules/vault/vault.routes';
@@ -41,14 +45,8 @@ const createServer = () => {
 
   app.register(jwt, {
     secret: {
-      private: readFileSync(
-        `${path.join(process.cwd(), 'certs')}/private.key`,
-        'utf8',
-      ),
-      public: readFileSync(
-        `${path.join(process.cwd(), 'certs')}/public.key`,
-        'utf8',
-      ),
+      private: readFileSync(PRIVATE_KEY_PATH, 'utf8'),
+      public: readFileSync(PUBLIC_KEY_PATH, 'utf8'),
     },
     sign: { algorithm: 'RS256' },
     cookie: {
