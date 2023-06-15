@@ -8,7 +8,7 @@
 
 ## ✨ Demo
 
-[![Homepage](https://raw.githubusercontent.com/JCarlosLucio/folio-2023/main/public/img/projects/password-vault-desktop.webp?token=GHSAT0AAAAAACB2FBORQYHUGMMASG3PDWRUZEKSLWA)](https://password-vault-client.vercel.app/)
+[![Password Vault Homepage](../media/password-vault-desktop.webp?raw=true)](https://password-vault-client.vercel.app/)
 
 ### Prerequisites
 
@@ -170,7 +170,7 @@ cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
 
 - ~~Add more tests~~
 - Add more tests for testing vaults
-- Add demo image for README.md
+- ~~Add demo image for README.md~~
 - Add 404 page
 - Add github actions for deployments
 - Improve server side validations
