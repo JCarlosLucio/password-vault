@@ -1,38 +1,42 @@
-# Turborepo starter
+# 🔒 Password Vault
 
-This is an official Yarn v1 starter turborepo.
+![Version](https://img.shields.io/badge/version-0.0.0-blue.svg?cacheSeconds=2592000)
+![Prerequisite](https://img.shields.io/badge/node-%3E%3D16.0.0-blue.svg)
 
-## What's inside?
+> A password vault made with Next.js and Fastify. Just for learning purposes not
+> for actual use.
 
-This turborepo uses [Yarn](https://classic.yarnpkg.com/) as a package manager.
-It includes the following packages/apps:
+## ✨ Demo
+
+[![Password Vault Homepage](../media/password-vault-desktop.webp?raw=true)](https://password-vault-client.vercel.app/)
+
+### Prerequisites
+
+- node >=16.0.0
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org) app
-- `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs`
-  applications
+- `client`: a [Next.js](https://nextjs.org) app with
+  [ChakraUI](https://chakra-ui.com/), and
+  [React Query](https://tanstack.com/query/latest).
+- `server`: a [Fastify](https://www.fastify.io) server with
+  [MongoDB](https://www.mongodb.com/) and [Vite](https://vitejs.dev/).
+- `ui`: a stub React component library to share components.
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next`
   and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `tsconfig`: `tsconfig.json`s used throughout the monorepo.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Install
 
-### Utilities
-
-This turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+```sh
+yarn install
+```
 
 ### Build
 
 To build all apps and packages, run the following command:
 
-```
-cd my-turborepo
+```sh
 yarn run build
 ```
 
@@ -40,44 +44,138 @@ yarn run build
 
 To develop all apps and packages, run the following command:
 
-```
-cd my-turborepo
+```sh
 yarn run dev
 ```
 
-### Remote Caching
+### Production
 
-Turborepo can use a technique known as
-[Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching) to
-share cache artifacts across machines, enabling you to share build caches with
-your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need
-an account with Vercel. If you don't have an account you can
-[create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+```sh
+yarn run start
 ```
 
-This will authenticate the Turborepo CLI with your
-[Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Run tests
 
-Next, you can link your Turborepo to your Remote Cache by running the following
-command from the root of your turborepo:
-
-```
-npx turbo link
+```sh
+yarn run test
 ```
 
-## Useful Links
+### Run e2e tests
 
-Learn more about the power of Turborepo:
+For the first time, install Playwright browsers:
 
-- [Pipelines](https://turborepo.org/docs/core-concepts/pipelines)
-- [Caching](https://turborepo.org/docs/core-concepts/caching)
-- [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching)
-- [Scoped Tasks](https://turborepo.org/docs/core-concepts/scopes)
-- [Configuration Options](https://turborepo.org/docs/reference/configuration)
-- [CLI Usage](https://turborepo.org/docs/reference/command-line-reference)
+```sh
+npx playwright install
+```
+
+Then:
+
+```sh
+yarn run test:e2e
+```
+
+### Lint
+
+```sh
+yarn run lint
+```
+
+### To [install package](https://turbo.build/repo/docs/handbook/package-installation#addingremovingupgrading-packages) in workspace (`client` | `server`)
+
+```sh
+yarn workspace <workspace> add <package>
+```
+
+### To upgrade dependencies
+
+Check outdated deps:
+
+```sh
+yarn outdated
+```
+
+Select which deps to upgrade:
+
+```sh
+yarn upgrade-interactive --latest
+```
+
+## Deployment
+
+### Client
+
+1. Link `github repo` to [Vercel](https://vercel.com/).
+2. Set `FRAMEWORK PRESET` to Next.js.
+3. Set `ROOT DIRECTORY` as `apps/client`.
+4. Override `BUILD COMMAND` with
+   [command](https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependencies-of-matched-workspaces):
+
+```sh
+cd ../.. && turbo run build --filter={/apps/client}...
+```
+
+or
+
+```sh
+cd ../.. && npx turbo run build --scope=client --include-dependencies --no-deps
+```
+
+but the second one is apparently deprecated.
+
+5. Add `client environment variables`.
+
+### Server
+
+1. Link github repo to [Render](https://render.com/).
+2. Set `ROOT DIRECTORY` as `apps/server`.
+3. Override `BUILD COMMAND` with
+   [command](https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependencies-of-matched-workspaces):
+
+```sh
+cd ../.. && turbo run build --filter={/apps/server}...
+```
+
+or
+
+```sh
+cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
+```
+
+4. Add `HEALTH CHECK PATH` to `/ping`.
+5. Add `server environment vartiables`.
+6. Add `NODE_VERSION` with desired version (node >=16.0.0) to environment
+   variables. Otherwise it defaults to `14.17.5`.
+7. Add secret/cert files with new
+   [generated private/public keys](https://rietta.com/blog/openssl-generating-rsa-key-from-command/).
+
+## 📖 Lessons Learned
+
+- Working with Hashing and Encrytion.
+- [Generating](https://rietta.com/blog/openssl-generating-rsa-key-from-command/)
+  and handling private/public keys.
+- How to setup and use a monorepo with turborepo.
+- How to make and test a fastify server.
+- Testing with Playwright
+- Using ChakraUI with a custom theme.
+- Using react-query within Next.js with error handling and custom toasts.
+- Client deployment to [Vercel](https://vercel.com/) from turborepo.
+- Server deployment to [Render](https://render.com/) from turborepo.
+- Using domains in the
+  [Public Suffixes List](https://github.com/publicsuffix/list) (ex.
+  herokuapp.com, onrender.com, vercel.app.)
+  [doesn't let you set cookies](https://devcenter.heroku.com/articles/cookies-and-herokuapp-com).
+  This can be fixed using a custom domain.
+
+## ✏️ TODO
+
+- ~~Add more tests~~
+- Add more tests for testing vaults
+- ~~Add demo image for README.md~~
+- Add 404 page
+- Add github actions for deployments
+- Improve server side validations
+
+## Acknowledgements
+
+- [TomDoesTech](https://www.youtube.com/watch?v=wHVzfjrD1Xg)
+- [Leo Roese](https://www.youtube.com/watch?v=YQLw5kJ1yrQ)
