@@ -110,17 +110,17 @@ pnpm update --interactive --latest
 4. Override `BUILD COMMAND` with
    [command](https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependencies-of-matched-workspaces):
 
-```sh
-cd ../.. && turbo run build --filter={/apps/client}...
-```
+   ```sh
+   cd ../.. && turbo run build --filter={/apps/client}...
+   ```
 
-or
+   or
 
-```sh
-cd ../.. && npx turbo run build --scope=client --include-dependencies --no-deps
-```
+   ```sh
+   cd ../.. && npx turbo run build --scope=client --include-dependencies --no-deps
+   ```
 
-but the second one is apparently deprecated.
+   but the second one is apparently deprecated.
 
 5. Add `client environment variables`.
 
@@ -131,15 +131,15 @@ but the second one is apparently deprecated.
 3. Override `BUILD COMMAND` with
    [command](https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependencies-of-matched-workspaces):
 
-```sh
-cd ../.. && turbo run build --filter={/apps/server}...
-```
+   ```sh
+   cd ../.. && turbo run build --filter={/apps/server}...
+   ```
 
-or
+   or
 
-```sh
-cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
-```
+   ```sh
+   cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
+   ```
 
 4. Add `HEALTH CHECK PATH` to `/ping`.
 5. Add `server environment variables`.
