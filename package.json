@@ -22,7 +22,7 @@
     "turbo": "latest"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=22.x"
   },
   "dependencies": {},
   "packageManager": "pnpm@10.15.1",
