@@ -8,7 +8,7 @@ const vaultRoutes = (
   done: (e?: FastifyError) => void,
 ) => {
   // PUT /api/vault
-  app.put('/', { onRequest: [app.authenticate] }, updateVaultHandler);
+  app.put('/', updateVaultHandler);
 
   done();
 };
