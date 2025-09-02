@@ -12,7 +12,7 @@
 
 ### Prerequisites
 
-- node >=16.0.0
+- node >=22.0.0
 
 ### Apps and Packages
 
@@ -29,7 +29,7 @@
 ### Install
 
 ```sh
-yarn install
+pnpm install
 ```
 
 ### Build
@@ -37,7 +37,7 @@ yarn install
 To build all apps and packages, run the following command:
 
 ```sh
-yarn run build
+pnpm build
 ```
 
 ### Develop
@@ -45,19 +45,19 @@ yarn run build
 To develop all apps and packages, run the following command:
 
 ```sh
-yarn run dev
+pnpm dev
 ```
 
 ### Production
 
 ```sh
-yarn run start
+pnpm start
 ```
 
 ### Run tests
 
 ```sh
-yarn run test
+pnpm test
 ```
 
 ### Run e2e tests
@@ -65,25 +65,25 @@ yarn run test
 For the first time, install Playwright browsers:
 
 ```sh
-npx playwright install
+pnpm exec playwright install
 ```
 
 Then:
 
 ```sh
-yarn run test:e2e
+pnpm test:e2e
 ```
 
 ### Lint
 
 ```sh
-yarn run lint
+pnpm lint
 ```
 
 ### To [install package](https://turbo.build/repo/docs/handbook/package-installation#addingremovingupgrading-packages) in workspace (`client` | `server`)
 
 ```sh
-yarn workspace <workspace> add <package>
+pnpm add <package> --filter=<workspace>
 ```
 
 ### To upgrade dependencies
@@ -91,13 +91,13 @@ yarn workspace <workspace> add <package>
 Check outdated deps:
 
 ```sh
-yarn outdated
+pnpm outdated
 ```
 
 Select which deps to upgrade:
 
 ```sh
-yarn upgrade-interactive --latest
+pnpm update --interactive --latest
 ```
 
 ## Deployment
@@ -142,8 +142,8 @@ cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
 ```
 
 4. Add `HEALTH CHECK PATH` to `/ping`.
-5. Add `server environment vartiables`.
-6. Add `NODE_VERSION` with desired version (node >=16.0.0) to environment
+5. Add `server environment variables`.
+6. Add `NODE_VERSION` with desired version (node >=22.0.0) to environment
    variables. Otherwise it defaults to `14.17.5`.
 7. Add secret/cert files with new
    [generated private/public keys](https://rietta.com/blog/openssl-generating-rsa-key-from-command/).
@@ -178,4 +178,3 @@ cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
 ## Acknowledgements
 
 - [TomDoesTech](https://www.youtube.com/watch?v=wHVzfjrD1Xg)
-- [Leo Roese](https://www.youtube.com/watch?v=YQLw5kJ1yrQ)
