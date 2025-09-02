@@ -17,7 +17,7 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 type PasswordInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>;
   register: UseFormRegister<TFormValues>;
-  rules?: RegisterOptions;
+  rules?: RegisterOptions<TFormValues, Path<TFormValues>>;
 } & Omit<InputProps, 'name'>;
 
 const PasswordInput = <TFormValues extends Record<string, unknown>>({
