@@ -12,11 +12,11 @@ export const updateVaultHandler = async (
   reply: FastifyReply,
 ) => {
   try {
-    const user = await request.jwtVerify<{ _id: string }>();
-
-    if (!user || !user?._id) {
-      throw new Error('authentication error');
-    }
+    const user = await request.jwtVerify<{
+      _id: string;
+      email: string;
+      iat: number;
+    }>();
 
     await updateVault({
       data: request.body.encryptedVault,
