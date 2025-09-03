@@ -15,16 +15,17 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.35.0",
-    "eslint-config-custom": "*",
+    "@repo/eslint-config-custom": "workspace:*",
+    "@types/node": "^24.3.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "2.8.8",
     "turbo": "latest"
   },
+  "dependencies": {},
   "engines": {
     "node": ">=22.x"
   },
-  "dependencies": {},
   "packageManager": "pnpm@10.15.1",
   "lint-staged": {
     "apps/**/*.{js,ts,jsx,tsx}": [
