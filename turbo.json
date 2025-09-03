@@ -7,7 +7,8 @@
       ],
       "outputs": [
         "dist/**",
-        ".next/**"
+        ".next/**",
+        "!.next/cache/**"
       ]
     },
     "client#build": {
@@ -17,8 +18,13 @@
       "env": [
         "NEXT_PUBLIC_API_ENDPOINT"
       ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.local"
+      ],
       "outputs": [
-        ".next/**"
+        ".next/**",
+        "!.next/cache/**"
       ]
     },
     "server#build": {
@@ -32,6 +38,10 @@
         "DATABASE_URL",
         "TEST_DATABASE_URL",
         "PORT"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env"
       ],
       "outputs": [
         "dist/**"
