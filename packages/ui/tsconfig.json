@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfig/nextjs.json",
+  "extends": "@repo/tsconfig/ui.json",
   "include": [
     "."
   ],
