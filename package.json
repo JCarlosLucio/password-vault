@@ -14,24 +14,25 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@playwright/test": "^1.35.0",
+    "@playwright/test": "^1.55.0",
     "@repo/eslint-config-custom": "workspace:*",
     "@types/node": "^24.3.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
-    "prettier": "2.8.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
+    "prettier": "3.6.2",
     "turbo": "latest"
   },
-  "dependencies": {},
   "engines": {
     "node": ">=22.x"
   },
   "packageManager": "pnpm@10.15.1",
   "lint-staged": {
     "apps/**/*.{js,ts,jsx,tsx}": [
+      "prettier --write",
       "eslint --fix"
     ],
     "packages/ui/**/*.{js,ts,jsx,tsx}": [
+      "prettier --write",
       "eslint --fix"
     ],
     "*.json": [
