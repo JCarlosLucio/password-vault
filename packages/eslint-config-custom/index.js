@@ -12,9 +12,8 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended', // Make sure this is always the last element in the array.
   ],
-  plugins: ['import', 'simple-import-sort', 'prettier'],
+  plugins: ['import', 'simple-import-sort'],
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
@@ -42,8 +41,6 @@ module.exports = {
     ],
     // next
     '@next/next/no-html-link-for-pages': 'off',
-    // prettier
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     //typescript
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-namespace': ['error', { allowDeclarations: true }],
