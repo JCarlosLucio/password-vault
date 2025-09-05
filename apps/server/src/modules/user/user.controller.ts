@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { type FastifyReply, type FastifyRequest } from 'fastify';
 
 import { COOKIE_DOMAIN, IS_PRODUCTION } from '../../constants';
 import logger from '../../utils/logger';

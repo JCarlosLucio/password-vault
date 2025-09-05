@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { type FastifyReply, type FastifyRequest } from 'fastify';
 
 import logger from '../../utils/logger';
 import { updateVault } from './vault.service';
