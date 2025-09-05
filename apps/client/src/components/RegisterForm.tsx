@@ -60,9 +60,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
           })}
         />
 
-        <FormErrorMessage>
-          {errors.email && errors.email.message}
-        </FormErrorMessage>
+        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
       </FormControl>
 
       <FormControl mt="4" isInvalid={!!errors.password}>
@@ -81,9 +79,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
             },
           }}
         />
-        <FormErrorMessage>
-          {errors.password && errors.password.message}
-        </FormErrorMessage>
+        <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
       </FormControl>
 
       <Flex direction="column" mt="4">
