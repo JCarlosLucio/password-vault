@@ -2,7 +2,7 @@
   "extends": "@repo/tsconfig/server.json",
   "compilerOptions": {
     "rootDir": ".",
-    "noEmit": true,
+    "outDir": "dist"
   },
   "include": [
     "src",
@@ -12,5 +12,7 @@
     ".turbo",
     "coverage",
     "dist",
+    "src/**/*.test.ts",
+    "src/tests/*",
   ]
 }
