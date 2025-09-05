@@ -42,7 +42,7 @@ const createServer = () => {
     parseOptions: {},
   });
 
-  app.get('/ping', async () => {
+  app.get('/ping', () => {
     return 'pong';
   });
   app.register(userRoutes, { prefix: 'api/users' });
