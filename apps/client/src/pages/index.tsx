@@ -11,7 +11,7 @@ import Nav from '../components/Nav';
 import RegisterForm from '../components/RegisterForm';
 import Vault from '../components/Vault';
 import { loadVault, loadVaultKey } from '../utils/storage';
-import { VaultItem } from '../utils/types';
+import { type VaultItem } from '../utils/types';
 
 const Home: NextPage = () => {
   const [step, setStep] = useState<'login' | 'register' | 'vault'>('login');

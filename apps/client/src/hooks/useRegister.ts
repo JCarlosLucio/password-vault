@@ -1,6 +1,6 @@
 import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
-import { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction } from 'react';
 
 import { registerUser } from '../api';
 import { generateVaultKey } from '../utils/crypto';

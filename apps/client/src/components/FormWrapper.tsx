@@ -1,6 +1,6 @@
-import { Box, BoxProps } from '@chakra-ui/react';
+import { Box, type BoxProps } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 type FormWrapperProps = { children: ReactNode; initialX?: number } & BoxProps;
 

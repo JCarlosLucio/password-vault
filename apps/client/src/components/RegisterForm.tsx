@@ -9,7 +9,7 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react';
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { type Dispatch, type MouseEvent, type SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
 import useRegister from '../hooks/useRegister';

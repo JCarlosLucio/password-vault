@@ -1,11 +1,11 @@
 import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
-import { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction } from 'react';
 
 import { loginUser } from '../api';
 import { decryptVault, generateVaultKey } from '../utils/crypto';
 import { storeVault, storeVaultKey } from '../utils/storage';
-import { VaultItem } from '../utils/types';
+import { type VaultItem } from '../utils/types';
 
 interface useLoginProps {
   setStep: Dispatch<SetStateAction<'register' | 'vault' | 'login'>>;

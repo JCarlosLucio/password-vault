@@ -1,4 +1,4 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, type IconProps } from '@chakra-ui/react';
 import { RiShieldKeyholeFill } from 'react-icons/ri';
 
 const ShieldIcon = ({ boxSize = [10], ...props }: IconProps) => {

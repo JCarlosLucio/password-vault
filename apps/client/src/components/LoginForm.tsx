@@ -9,12 +9,12 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react';
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { type Dispatch, type MouseEvent, type SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
-import useLogin from 'src/hooks/useLogin';
 
+import useLogin from '../hooks/useLogin';
 import { hashPassword } from '../utils/crypto';
-import { VaultItem } from '../utils/types';
+import { type VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
 import PasswordInput from './PasswordInput';
 
@@ -59,9 +59,7 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
             },
           })}
         />
-        <FormErrorMessage>
-          {errors.email && errors.email.message}
-        </FormErrorMessage>
+        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
       </FormControl>
 
       <FormControl mt="4" isInvalid={!!errors.password}>
@@ -80,9 +78,7 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
             },
           }}
         />
-        <FormErrorMessage>
-          {errors.password && errors.password.message}
-        </FormErrorMessage>
+        <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
       </FormControl>
 
       <Flex direction="column" mt="4">

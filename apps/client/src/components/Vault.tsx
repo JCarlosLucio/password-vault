@@ -11,11 +11,11 @@ import {
 import { AnimatePresence, motion } from 'framer-motion';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FaGrinBeamSweat } from 'react-icons/fa';
-import useSaveVault from 'src/hooks/useSaveVault';
 
+import useSaveVault from '../hooks/useSaveVault';
 import { encryptVault } from '../utils/crypto';
 import { storeVault } from '../utils/storage';
-import { VaultItem } from '../utils/types';
+import { type VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
 import PasswordInput from './PasswordInput';
 

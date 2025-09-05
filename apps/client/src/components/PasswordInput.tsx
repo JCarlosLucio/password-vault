@@ -2,15 +2,15 @@ import {
   IconButton,
   Input,
   InputGroup,
-  InputProps,
+  type InputProps,
   InputRightElement,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import {
-  FieldValues,
-  Path,
-  RegisterOptions,
-  UseFormRegister,
+  type FieldValues,
+  type Path,
+  type RegisterOptions,
+  type UseFormRegister,
 } from 'react-hook-form';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
