@@ -3,12 +3,17 @@
   "display": "Server",
   "extends": "./base.json",
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     "noEmit": false,
-    "module": "commonjs",
     "sourceMap": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "moduleDetection": "force",
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
   }
 }
