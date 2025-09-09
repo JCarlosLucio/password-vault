@@ -9,10 +9,11 @@ export const { toast } = createStandaloneToast({ theme });
 const queryErrorHandler = (error: unknown) => {
   let errorMessage = 'error connecting to server';
   if (error instanceof AxiosError) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     errorMessage =
-      error?.response?.data?.message ||
-      // remove the initial 'Error: ' that accompanies many errors
-      error?.toString().replace(/^Error:\s*/, '');
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      error?.response?.data?.message ??
+      JSON.stringify(error).replace(/^Error:\s*/, ''); // remove the initial 'Error: ' that accompanies many errors
   }
 
   toast({
