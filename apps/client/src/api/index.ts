@@ -26,7 +26,7 @@ export const saveVault = async ({
 }: {
   encryptedVault: string;
 }) => {
-  const response = await axios.put(
+  const response = await axios.put<void>(
     vaultBase,
     { encryptedVault },
     {
