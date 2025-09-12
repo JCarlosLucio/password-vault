@@ -18,16 +18,16 @@
   "author": "Juan Carlos Lucio",
   "license": "ISC",
   "dependencies": {
-    "@fastify/cookie": "^8.3.0",
-    "@fastify/cors": "^8.3.0",
-    "@fastify/helmet": "^10.1.1",
-    "@fastify/jwt": "^7.0.0",
-    "@typegoose/typegoose": "^11.2.0",
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^11.1.0",
+    "@fastify/helmet": "^13.0.1",
+    "@fastify/jwt": "^10.0.0",
+    "@typegoose/typegoose": "^12.19.0",
     "argon2": "^0.44.0",
-    "dotenv": "^16.1.4",
-    "fastify": "^4.18.0",
-    "mongoose": "^7.2.4",
-    "pino": "^8.14.1"
+    "dotenv": "^17.2.2",
+    "fastify": "^5.6.0",
+    "mongoose": "^8.18.1",
+    "pino": "^9.9.5"
   },
   "devDependencies": {
     "@repo/eslint-config-custom": "workspace:*",
