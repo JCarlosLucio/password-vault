@@ -24,6 +24,7 @@ const createServer = () => {
   app.register(cors, {
     origin: CORS_ORIGIN,
     credentials: true,
+    methods: ['GET', 'HEAD', 'POST', 'PUT'],
   });
 
   app.register(jwt, {
