@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development tsx watch src/main.ts",
     "start": "cross-env NODE_ENV=production node dist/src/main.js",
     "start:test": "cross-env NODE_ENV=test node dist/src/main.js",
-    "build": "tsc --project tsconfig.production.json",
+    "build": "tsc --project tsconfig.production.json --listEmittedFiles",
     "test": "cross-env NODE_ENV=test vitest run",
     "lint": "eslint ./src --fix"
   },
