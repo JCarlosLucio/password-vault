@@ -10,7 +10,7 @@
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
     "moduleDetection": "force",
-    "module": "esnext",
+    "module": "commonjs",
     "resolveJsonModule": true,
     "allowJs": true,
     "esModuleInterop": true,

@@ -17,7 +17,6 @@
   ],
   "author": "Juan Carlos Lucio",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "@fastify/cookie": "^8.3.0",
     "@fastify/cors": "^8.3.0",
