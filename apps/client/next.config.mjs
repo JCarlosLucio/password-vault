@@ -1,7 +1,7 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  swcMinify: true,
+  eslint: {},
 };
 
 export default config;
