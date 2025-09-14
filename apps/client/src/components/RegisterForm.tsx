@@ -29,7 +29,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
     formState: { errors },
   } = useForm<{ email: string; password: string; hashedPassword: string }>();
 
-  const { register: registerUser, isLoading } = useRegister({
+  const { register: registerUser, isPending } = useRegister({
     setStep,
     setVaultKey,
   });
@@ -87,7 +87,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
           type="submit"
           variant="gradient"
           data-testid="register-btn"
-          isLoading={isLoading}
+          isPending={isPending}
           size="lg"
         >
           Register

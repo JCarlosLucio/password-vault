@@ -36,7 +36,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
     name: 'vault',
   });
 
-  const { save, isLoading } = useSaveVault();
+  const { save, isPending } = useSaveVault();
 
   return (
     <FormWrapper
@@ -142,7 +142,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
 
         <Button
           type="submit"
-          isLoading={isLoading}
+          isPending={isPending}
           variant="gradient"
           size="lg"
         >

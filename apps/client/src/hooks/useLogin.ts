@@ -16,7 +16,8 @@ interface useLoginProps {
 const useLogin = ({ setStep, setVault, setVaultKey }: useLoginProps) => {
   const toast = useToast();
 
-  const { mutate: login, isLoading } = useMutation(loginUser, {
+  const { mutate: login, isPending } = useMutation({
+    mutationFn: loginUser,
     onSuccess: ({ salt, vault }, { hashedPassword, email }) => {
       const vaultKey = generateVaultKey({ email, hashedPassword, salt });
       storeVaultKey(vaultKey);
@@ -37,7 +38,7 @@ const useLogin = ({ setStep, setVault, setVaultKey }: useLoginProps) => {
     },
   });
 
-  return { login, isLoading };
+  return { login, isPending };
 };
 
 export default useLogin;

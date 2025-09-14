@@ -14,7 +14,8 @@ interface useRegisterProps {
 const useRegister = ({ setStep, setVaultKey }: useRegisterProps) => {
   const toast = useToast();
 
-  const { mutate: register, isLoading } = useMutation(registerUser, {
+  const { mutate: register, isPending } = useMutation({
+    mutationFn: registerUser,
     onSuccess: ({ salt, vault }, { hashedPassword, email }) => {
       const vaultKey = generateVaultKey({ email, hashedPassword, salt });
       storeVaultKey(vaultKey);
@@ -33,7 +34,7 @@ const useRegister = ({ setStep, setVaultKey }: useRegisterProps) => {
     },
   });
 
-  return { register, isLoading };
+  return { register, isPending };
 };
 
 export default useRegister;

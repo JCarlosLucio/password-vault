@@ -6,7 +6,8 @@ import { saveVault } from '../api';
 const useSaveVault = () => {
   const toast = useToast();
 
-  const { mutate: save, isLoading } = useMutation(saveVault, {
+  const { mutate: save, isPending } = useMutation({
+    mutationFn: saveVault,
     onSuccess: () => {
       toast({
         id: 'vault-saved',
@@ -18,7 +19,7 @@ const useSaveVault = () => {
     },
   });
 
-  return { save, isLoading };
+  return { save, isPending };
 };
 
 export default useSaveVault;

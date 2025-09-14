@@ -31,7 +31,7 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
     formState: { errors },
   } = useForm<{ email: string; password: string; hashedPassword: string }>();
 
-  const { login, isLoading } = useLogin({ setStep, setVault, setVaultKey });
+  const { login, isPending } = useLogin({ setStep, setVault, setVaultKey });
 
   const goToRegister = (_e: MouseEvent<HTMLButtonElement>) =>
     setStep('register');
@@ -86,7 +86,7 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
           type="submit"
           variant="gradient"
           data-testid="login-btn"
-          isLoading={isLoading}
+          isLoading={isPending}
           size="lg"
         >
           Login
