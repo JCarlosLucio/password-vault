@@ -1,7 +1,7 @@
 import { Flex, Heading } from '@chakra-ui/react';
 
-import ColorModeToggle from './ColorModeToggle';
 import ShieldIcon from './ShieldIcon';
+import { ColorModeButton } from './ui/color-mode';
 
 const Nav = () => {
   return (
@@ -27,7 +27,7 @@ const Nav = () => {
             Password Vault
           </Heading>
         </Flex>
-        <ColorModeToggle />
+        <ColorModeButton />
       </Flex>
     </Flex>
   );
