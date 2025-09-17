@@ -1,21 +1,17 @@
 import '../styles/globals.css';
 
-import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 
+import { Provider } from '../components/ui/provider';
 import { queryClient } from '../utils/queryClient';
-import theme from '../utils/theme';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider
-        theme={theme}
-        toastOptions={{ portalProps: { appendToParentPortal: true } }}
-      >
+      <Provider>
         <Component {...pageProps} />
-      </ChakraProvider>
+      </Provider>
     </QueryClientProvider>
   );
 };
