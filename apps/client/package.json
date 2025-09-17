@@ -9,7 +9,8 @@
     "start": "next start",
     "start:test": "next start",
     "test": "echo \"Client tests\"",
-    "lint": "eslint ./src --fix"
+    "lint": "eslint ./src --fix",
+    "chakra": "chakra"
   },
   "type": "module",
   "dependencies": {
