@@ -9,13 +9,11 @@ const Nav = () => {
       as="nav"
       w="100%"
       justify="center"
-      backdropFilter="auto"
-      backdropBlur="2px"
-      _dark={{ backdropBlur: '6px' }}
       py="3"
       px="5"
       position="fixed"
-      zIndex="1"
+      zIndex="10"
+      backdropFilter="blur(12px)"
     >
       <Flex w={['100%', '55%']} justify="space-between">
         <Flex gap={['2', '4']} align="center">

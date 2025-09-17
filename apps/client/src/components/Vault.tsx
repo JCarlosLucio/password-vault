@@ -40,9 +40,10 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
 
   return (
     <FormWrapper
-      maxW="container.lg"
-      mt="12"
-      pt="12"
+      maxW="6xl"
+      mt="16"
+      pt={['6', '10']}
+      gap={['2', '5']}
       overflowX="hidden"
       onSubmit={handleSubmit(({ vault }) => {
         const encryptedVault = encryptVault({
@@ -55,7 +56,13 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
         save({ encryptedVault });
       })}
     >
-      <Heading data-testid="vault-heading">Vault</Heading>
+      <Heading
+        data-testid="vault-heading"
+        size={['3xl', '4xl']}
+        letterSpacing="normal"
+      >
+        Vault
+      </Heading>
 
       {fields.length < 1 && (
         <Flex my="12" direction="column" align="center" gap="5">
@@ -65,7 +72,9 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
             color="orange.400"
             _dark={{ color: 'yellow.400' }}
           />
-          <Text>Your vault is empty. Maybe Add something?</Text>
+          <Text textAlign="center">
+            Your vault is empty. Maybe Add something?
+          </Text>
         </Flex>
       )}
 
@@ -135,17 +144,12 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
         <Button
           onClick={() => append({ website: '', username: '', password: '' })}
           variant="outline"
-          size="lg"
+          size="xl"
         >
           Add
         </Button>
 
-        <Button
-          type="submit"
-          isPending={isPending}
-          variant="gradient"
-          size="lg"
-        >
+        <Button type="submit" loading={isPending} variant="gradient" size="xl">
           Save Vault
         </Button>
       </Flex>
