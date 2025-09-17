@@ -3,7 +3,6 @@ import {
   Input,
   InputGroup,
   type InputProps,
-  InputRightElement,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import {
@@ -31,21 +30,23 @@ const PasswordInput = <TFormValues extends Record<string, unknown>>({
   const handleClick = () => setShow(!show);
 
   return (
-    <InputGroup size="md">
+    <InputGroup
+      endElement={
+        <IconButton
+          onClick={handleClick}
+          size="sm"
+          aria-label={show ? 'Hide password' : 'Show password'}
+        >
+          show ? <FaRegEyeSlash /> : <FaRegEye />
+        </IconButton>
+      }
+    >
       <Input
         pr="4.5rem"
         {...props}
         type={show ? 'text' : 'password'}
         {...register(name, rules)}
       />
-      <InputRightElement>
-        <IconButton
-          onClick={handleClick}
-          size="sm"
-          aria-label={show ? 'Hide password' : 'Show password'}
-          icon={show ? <FaRegEyeSlash /> : <FaRegEye />}
-        />
-      </InputRightElement>
     </InputGroup>
   );
 };
