@@ -1,21 +1,12 @@
-import {
-  Button,
-  Divider,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Heading,
-  Input,
-  Text,
-} from '@chakra-ui/react';
+import { Field, Flex, Heading, Input, Separator, Text } from '@chakra-ui/react';
 import { type Dispatch, type MouseEvent, type SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
 import useRegister from '../hooks/useRegister';
 import { hashPassword } from '../utils/crypto';
 import FormWrapper from './FormWrapper';
-import PasswordInput from './PasswordInput';
+import { Button } from './ui/button';
+import { PasswordInput } from './ui/password-input';
 
 interface RegisterFormProps {
   setStep: Dispatch<SetStateAction<'register' | 'vault' | 'login'>>;
@@ -42,11 +33,17 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit(onSubmit)} initialX={-100}>
-      <Heading data-testid="form-heading">Register</Heading>
+    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+      <Heading
+        data-testid="form-heading"
+        size={['3xl', '4xl']}
+        letterSpacing="normal"
+      >
+        Register
+      </Heading>
 
-      <FormControl mt="4" isInvalid={!!errors.email}>
-        <FormLabel htmlFor="email">Email</FormLabel>
+      <Field.Root invalid={!!errors.email}>
+        <Field.Label htmlFor="email">Email</Field.Label>
         <Input
           id="email"
           placeholder="Email"
@@ -59,43 +56,40 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
             },
           })}
         />
+        <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
+      </Field.Root>
 
-        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-      </FormControl>
-
-      <FormControl mt="4" isInvalid={!!errors.password}>
-        <FormLabel htmlFor="password">Password</FormLabel>
+      <Field.Root invalid={!!errors.password}>
+        <Field.Label htmlFor="password">Password</Field.Label>
         <PasswordInput
           id="password"
           placeholder="Password"
-          name="password"
           data-testid="password-input"
-          register={register}
-          rules={{
+          {...register('password', {
             required: 'Password is required',
             minLength: {
               value: 6,
               message: 'Password must be at least 6 characters long',
             },
-          }}
+          })}
         />
-        <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-      </FormControl>
+        <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
+      </Field.Root>
 
-      <Flex direction="column" mt="4">
+      <Flex direction="column">
         <Button
           type="submit"
           variant="gradient"
           data-testid="register-btn"
-          isPending={isPending}
-          size="lg"
+          loading={isPending}
+          size="xl"
         >
           Register
         </Button>
       </Flex>
 
-      <Flex direction="column" alignItems="start" gap="4" mt="5">
-        <Divider mt="6" mb="6" />
+      <Flex direction="column" alignItems="start" gap="5">
+        <Separator mt="6" mb="6" />
         <Text fontSize="md" as="b">
           Already have an account?
         </Text>
@@ -103,7 +97,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
           variant="outline"
           data-testid="go-to-login-btn"
           onClick={goToLogin}
-          size="lg"
+          size="xl"
         >
           Login
         </Button>
