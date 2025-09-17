@@ -18,8 +18,7 @@ const useRegister = ({ setStep, setVaultKey }: useRegisterProps) => {
       const vaultKey = generateVaultKey({ email, hashedPassword, salt });
       storeVaultKey(vaultKey);
       setVaultKey(vaultKey);
-
-      storeVault(JSON.stringify(vault));
+      storeVault(vault);
       setStep('vault');
       toaster.create({
         title: 'Welcome!',
