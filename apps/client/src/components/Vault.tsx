@@ -90,6 +90,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
                     type="url"
                     id="website"
                     placeholder="Website"
+                    data-testid={`website-input-${index}`}
                     {...register(`vault.${index}.website`, {
                       required: 'Website is required',
                     })}
@@ -101,6 +102,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
                   <Input
                     id="username"
                     placeholder="Username"
+                    data-testid={`username-input-${index}`}
                     {...register(`vault.${index}.username`, {
                       required: 'Username is required',
                     })}
@@ -112,6 +114,7 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
                   <PasswordInput
                     id="password"
                     placeholder="Password"
+                    data-testid={`password-input-${index}`}
                     {...register(`vault.${index}.password`, {
                       required: 'Password is required',
                     })}
@@ -139,11 +142,18 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
           onClick={() => append({ website: '', username: '', password: '' })}
           variant="outline"
           size="xl"
+          data-testid="add-vault-item-btn"
         >
           Add
         </Button>
 
-        <Button type="submit" loading={isPending} variant="gradient" size="xl">
+        <Button
+          type="submit"
+          loading={isPending}
+          variant="gradient"
+          size="xl"
+          data-testid="save-vault-btn"
+        >
           Save Vault
         </Button>
       </Flex>
