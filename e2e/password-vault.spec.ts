@@ -12,6 +12,12 @@ const TEST_LOGIN_USER = {
   password: '123456',
 };
 
+const TEST_VAULT = {
+  website: 'https://www.test.com/',
+  username: 'test',
+  password: 'test-password',
+};
+
 test.beforeEach(async ({ page, request }) => {
   await request.post('http://localhost:4000/api/testing/reset'); // Reset db for testing
 
@@ -94,5 +100,24 @@ test.describe('Login', () => {
       'Invalid email or password',
     );
     await expect(page.getByTestId('form-heading')).toHaveText('Login');
+  });
+});
+
+test.describe('Vault', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
+    await page.getByTestId('password-input').fill(TEST_LOGIN_USER.password);
+    await page.getByTestId('login-btn').click();
+  });
+
+  test('should add vault item', async ({ page }) => {
+    await page.getByTestId('add-vault-item-btn').click();
+    await page.getByTestId('website-input-0').fill(TEST_VAULT.website);
+    await page.getByTestId('username-input-0').fill(TEST_VAULT.username);
+    await page.getByTestId('password-input-0').fill(TEST_VAULT.password);
+    await page.getByTestId('save-vault-btn').click();
+    await expect(page.getByTestId('toast-title').first()).toHaveText(
+      'Vault saved!',
+    );
   });
 });
