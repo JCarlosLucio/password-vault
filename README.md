@@ -100,6 +100,21 @@ Select which deps to upgrade:
 pnpm update --interactive --latest
 ```
 
+### Using the Chakra CLI to generate snippets/components/typings
+
+Use the [Chakra CLI](https://chakra-ui.com/docs/get-started/cli) to install
+snippets/components.
+
+```sh
+pnpm --filter=client chakra snippet add <snippet>
+```
+
+To generate typings use:
+
+```sh
+pnpm --filter=client chakra typegen src/utils/theme.ts
+```
+
 ## Deployment
 
 ### Client
