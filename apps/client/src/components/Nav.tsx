@@ -13,7 +13,8 @@ const Nav = () => {
       px="5"
       position="fixed"
       zIndex="10"
-      backdropFilter="blur(12px)"
+      backdropFilter="blur(2px)"
+      _dark={{ backdropFilter: 'blur(8px)' }}
     >
       <Flex w={['100%', '55%']} justify="space-between">
         <Flex gap={['2', '4']} align="center">
