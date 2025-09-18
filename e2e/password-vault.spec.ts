@@ -42,9 +42,7 @@ test.describe('Register', () => {
     await page.getByTestId('email-input').fill(TEST_USER.email);
     await page.getByTestId('password-input').fill(TEST_USER.password);
     await page.getByTestId('register-btn').click();
-    await expect(page.locator('#toast-register-success')).toHaveText(
-      'Welcome!',
-    );
+    await expect(page.getByTestId('toast-title')).toHaveText('Welcome!');
     await expect(page.getByTestId('vault-heading')).toHaveText('Vault');
   });
 
@@ -53,10 +51,10 @@ test.describe('Register', () => {
     await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
     await page.getByTestId('password-input').fill(TEST_LOGIN_USER.password);
     await page.getByTestId('register-btn').click();
-    await expect(page.locator('#toast-error-title')).toHaveText(
+    await expect(page.getByTestId('toast-title')).toHaveText(
       'An error occurred',
     );
-    await expect(page.locator('#toast-error-description')).toHaveText(
+    await expect(page.getByTestId('toast-description')).toHaveText(
       'Email already taken',
     );
     await expect(page.getByTestId('form-heading')).toHaveText('Register');
@@ -81,9 +79,7 @@ test.describe('Login', () => {
     await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
     await page.getByTestId('password-input').fill(TEST_LOGIN_USER.password);
     await page.getByTestId('login-btn').click();
-    await expect(page.locator('#toast-login-success')).toHaveText(
-      'Welcome back!',
-    );
+    await expect(page.getByTestId('toast-title')).toHaveText('Welcome back!');
     await expect(page.getByTestId('vault-heading')).toHaveText('Vault');
   });
 
@@ -91,10 +87,10 @@ test.describe('Login', () => {
     await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
     await page.getByTestId('password-input').fill('wrongpassword');
     await page.getByTestId('login-btn').click();
-    await expect(page.locator('#toast-error-title')).toHaveText(
+    await expect(page.getByTestId('toast-title')).toHaveText(
       'An error occurred',
     );
-    await expect(page.locator('#toast-error-description')).toHaveText(
+    await expect(page.getByTestId('toast-description')).toHaveText(
       'Invalid email or password',
     );
     await expect(page.getByTestId('form-heading')).toHaveText('Login');
