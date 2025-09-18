@@ -9,6 +9,9 @@ export const system = createSystem(defaultConfig, {
             '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,sans-serif',
         },
       },
+      colors: {
+        black: { value: '#000' },
+      },
       lineHeights: {
         normal: { value: '1.5' },
       },
