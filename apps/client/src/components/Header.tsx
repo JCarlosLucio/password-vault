@@ -17,6 +17,12 @@ const Header = () => {
       backdropBlur="2px"
       _dark={{ backdropBlur: '6px' }}
       as="header"
+      data-state="open"
+      _open={{
+        animationName: 'slideDown',
+        animationDuration: '500ms',
+        animationTimingFunction: 'ease-in',
+      }}
     >
       <ShieldIcon boxSize={[14, 16]} />
       <Heading

@@ -38,6 +38,7 @@ const Home: NextPage = () => {
       align="center"
       h="100%"
       overflowX="hidden"
+      overflowY={['scroll', 'hidden']}
     >
       <Head>
         <title>🔒 Password Vault</title>
