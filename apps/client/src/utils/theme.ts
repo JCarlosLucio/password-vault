@@ -13,6 +13,32 @@ export const system = createSystem(defaultConfig, {
         normal: { value: '1.5' },
       },
     },
+    keyframes: {
+      fadeIn: {
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+      },
+      fadeOut: {
+        from: { opacity: 1 },
+        to: { opacity: 0 },
+      },
+      slideUp: {
+        from: { transform: 'translateY(100%)' },
+        to: { transform: 'translateY(0%)' },
+      },
+      slideDown: {
+        from: { transform: 'translateY(-100%)' },
+        to: { transform: 'translateY(0%)' },
+      },
+      slideIn: {
+        from: { transform: 'translateX(-100%)' },
+        to: { transform: 'translateX(0%)' },
+      },
+      slideOut: {
+        from: { transform: 'translateX(0%)' },
+        to: { transform: 'translateX(100%)' },
+      },
+    },
     recipes: {
       heading: defineRecipe({
         variants: {
