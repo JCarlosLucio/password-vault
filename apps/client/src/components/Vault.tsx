@@ -1,4 +1,5 @@
 import { Field, Flex, Heading, Icon, Input, Text } from '@chakra-ui/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FaGrinBeamSweat } from 'react-icons/fa';
 
@@ -68,68 +69,70 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
           </Text>
         </Flex>
       )}
-
-      {fields.map((field, index) => {
-        return (
-          <Flex
-            key={field.id}
-            direction={['column', 'row']}
-            align="flex-end"
-            my="4"
-            gap="3"
-            data-state="open"
-            _open={{
-              animationName: 'fadeIn, slideIn',
-              animationDuration: '300ms',
-            }}
-          >
-            <Field.Root>
-              <Field.Label htmlFor="website">Website</Field.Label>
-              <Input
-                type="url"
-                id="website"
-                placeholder="Website"
-                {...register(`vault.${index}.website`, {
-                  required: 'Website is required',
-                })}
-              />
-            </Field.Root>
-
-            <Field.Root ml="2">
-              <Field.Label htmlFor="username">Username</Field.Label>
-              <Input
-                id="username"
-                placeholder="Username"
-                {...register(`vault.${index}.username`, {
-                  required: 'Username is required',
-                })}
-              />
-            </Field.Root>
-
-            <Field.Root ml="2">
-              <Field.Label htmlFor="password">Password</Field.Label>
-              <PasswordInput
-                id="password"
-                placeholder="Password"
-                {...register(`vault.${index}.password`, {
-                  required: 'Password is required',
-                })}
-              />
-            </Field.Root>
-
-            <Button
-              bg="red.500"
-              color="white"
-              fontSize="2xl"
-              ml="2"
-              type="button"
-              onClick={() => remove(index)}
+      <AnimatePresence>
+        {fields.map((field, index) => {
+          return (
+            <motion.div
+              key={field.id}
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
             >
-              -
-            </Button>
-          </Flex>
-        );
-      })}
+              <Flex
+                direction={['column', 'row']}
+                align="flex-end"
+                my="4"
+                gap="3"
+              >
+                <Field.Root>
+                  <Field.Label htmlFor="website">Website</Field.Label>
+                  <Input
+                    type="url"
+                    id="website"
+                    placeholder="Website"
+                    {...register(`vault.${index}.website`, {
+                      required: 'Website is required',
+                    })}
+                  />
+                </Field.Root>
+
+                <Field.Root ml="2">
+                  <Field.Label htmlFor="username">Username</Field.Label>
+                  <Input
+                    id="username"
+                    placeholder="Username"
+                    {...register(`vault.${index}.username`, {
+                      required: 'Username is required',
+                    })}
+                  />
+                </Field.Root>
+
+                <Field.Root ml="2">
+                  <Field.Label htmlFor="password">Password</Field.Label>
+                  <PasswordInput
+                    id="password"
+                    placeholder="Password"
+                    {...register(`vault.${index}.password`, {
+                      required: 'Password is required',
+                    })}
+                  />
+                </Field.Root>
+
+                <Button
+                  bg="red.500"
+                  color="white"
+                  fontSize="2xl"
+                  ml="2"
+                  type="button"
+                  onClick={() => remove(index)}
+                >
+                  -
+                </Button>
+              </Flex>
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
 
       <Flex justifyContent="space-between" mt="4">
         <Button
