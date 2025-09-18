@@ -21,10 +21,10 @@
   [React Query](https://tanstack.com/query/latest).
 - `server`: a [Fastify](https://www.fastify.io) server with
   [MongoDB](https://www.mongodb.com/) and [Vite](https://vitejs.dev/).
-- `ui`: a stub React component library to share components.
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next`
-  and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo.
+- `@repo/ui`: a stub React component library to share components.
+- `@repo/eslint-config-custom`: `eslint` configurations (includes
+  `eslint-plugin-next` and `eslint-config-prettier`)
+- `@repo/tsconfig`: `tsconfig.json`s used throughout the monorepo.
 
 ### Install
 
