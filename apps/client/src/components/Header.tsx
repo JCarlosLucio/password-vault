@@ -13,14 +13,12 @@ const Header = () => {
       px="10"
       gap={[1, 5]}
       w="100%"
-      backdropFilter="auto"
-      backdropBlur="2px"
-      _dark={{ backdropBlur: '6px' }}
+      zIndex="1"
       as="header"
       data-state="open"
       _open={{
         animationName: 'slideDown',
-        animationDuration: '500ms',
+        animationDuration: '300ms',
         animationTimingFunction: 'ease-in',
       }}
     >
