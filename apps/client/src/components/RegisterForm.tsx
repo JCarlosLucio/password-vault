@@ -33,7 +33,7 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+    <FormWrapper onSubmit={handleSubmit(onSubmit)} initialX={-100}>
       <Heading
         data-testid="form-heading"
         size={['3xl', '4xl']}
