@@ -18,7 +18,13 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<{ email: string; password: string; hashedPassword: string }>();
+    watch,
+  } = useForm<{
+    email: string;
+    password: string;
+    hashedPassword: string;
+    confirmPassword: string;
+  }>();
 
   const { register: registerUser, isPending } = useRegister({
     setStep,
@@ -74,6 +80,21 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
           })}
         />
         <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
+      </Field.Root>
+
+      <Field.Root invalid={!!errors.confirmPassword}>
+        <Field.Label htmlFor="password">Confirm Password</Field.Label>
+        <PasswordInput
+          id="confirmPassword"
+          placeholder="Confirm Password"
+          data-testid="confirm-password-input"
+          {...register('confirmPassword', {
+            required: 'Confirm password is required',
+            validate: (val) =>
+              val === watch('password') || 'Passwords must match',
+          })}
+        />
+        <Field.ErrorText>{errors.confirmPassword?.message}</Field.ErrorText>
       </Field.Root>
 
       <Flex direction="column">
