@@ -68,8 +68,8 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
           {...register('password', {
             required: 'Password is required',
             minLength: {
-              value: 6,
-              message: 'Password must be at least 6 characters long',
+              value: 8,
+              message: 'Password must be at least 8 characters long',
             },
           })}
         />
