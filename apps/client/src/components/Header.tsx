@@ -8,8 +8,8 @@ const Header = () => {
       justify="center"
       align="center"
       direction={['column', 'row']}
-      pt={[10, 36]}
-      pb={[1, 24]}
+      pt={[10, 32]}
+      pb={[1, 20]}
       px="10"
       gap={[1, 5]}
       w="100%"
