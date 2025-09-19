@@ -76,24 +76,23 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
         <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
       </Field.Root>
 
-      <Flex direction="column">
-        <Button
-          type="submit"
-          variant="gradient"
-          data-testid="login-btn"
-          loading={isPending}
-          size="xl"
-        >
-          Login
-        </Button>
-      </Flex>
+      <Button
+        type="submit"
+        variant="gradient"
+        data-testid="login-btn"
+        loading={isPending}
+        size="xl"
+      >
+        Login
+      </Button>
 
-      <Flex direction="column" alignItems="start" gap="5">
-        <Separator mt="6" mb="6" />
+      <Flex direction="column" gap="5">
+        <Separator mt="6" />
         <Text fontSize="md" as="b">
           Don&apos;t have an account?
         </Text>
         <Button
+          alignSelf="self-start"
           variant="outline"
           data-testid="go-to-register-btn"
           onClick={goToRegister}
