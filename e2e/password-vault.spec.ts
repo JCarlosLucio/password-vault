@@ -9,7 +9,7 @@ const TEST_USER = {
 
 const TEST_LOGIN_USER = {
   email: 'test@test.com',
-  password: '123456',
+  password: '12345678',
 };
 
 const TEST_VAULT = {
@@ -47,6 +47,7 @@ test.describe('Register', () => {
     await page.getByTestId('go-to-register-btn').click();
     await page.getByTestId('email-input').fill(TEST_USER.email);
     await page.getByTestId('password-input').fill(TEST_USER.password);
+    await page.getByTestId('confirm-password-input').fill(TEST_USER.password);
     await page.getByTestId('register-btn').click();
     await expect(page.getByTestId('toast-title')).toHaveText('Welcome!');
     await expect(page.getByTestId('vault-heading')).toHaveText('Vault');
@@ -56,6 +57,9 @@ test.describe('Register', () => {
     await page.getByTestId('go-to-register-btn').click();
     await page.getByTestId('email-input').fill(TEST_LOGIN_USER.email);
     await page.getByTestId('password-input').fill(TEST_LOGIN_USER.password);
+    await page
+      .getByTestId('confirm-password-input')
+      .fill(TEST_LOGIN_USER.password);
     await page.getByTestId('register-btn').click();
     await expect(page.getByTestId('toast-title')).toHaveText(
       'An error occurred',
