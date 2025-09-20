@@ -47,6 +47,8 @@ export const system = createSystem(defaultConfig, {
         variants: {
           variant: {
             gradient: {
+              fontFamily:
+                '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,sans-serif',
               fontWeight: 'extrabold',
               bgClip: 'text',
               bgGradient: 'to-r',
