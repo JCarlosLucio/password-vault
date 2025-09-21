@@ -126,13 +126,13 @@ pnpm --filter=client chakra typegen src/utils/theme.ts
    [command](https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependencies-of-matched-workspaces):
 
    ```sh
-   cd ../.. && turbo run build --filter={/apps/client}...
+   pnpm --filter=client chakra typegen src/utils/theme.ts && cd ../.. && turbo run build --filter=client
    ```
 
    or
 
    ```sh
-   cd ../.. && npx turbo run build --scope=client --include-dependencies --no-deps
+   pnpm --filter=client chakra typegen src/utils/theme.ts && cd ../.. && npx turbo run build --scope=client --include-dependencies --no-deps
    ```
 
    but the second one is apparently deprecated.
