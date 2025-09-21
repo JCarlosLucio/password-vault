@@ -12,7 +12,7 @@
 
 ### Prerequisites
 
-- node >=16.0.0
+- node >=22.0.0
 
 ### Apps and Packages
 
@@ -21,15 +21,15 @@
   [React Query](https://tanstack.com/query/latest).
 - `server`: a [Fastify](https://www.fastify.io) server with
   [MongoDB](https://www.mongodb.com/) and [Vite](https://vitejs.dev/).
-- `ui`: a stub React component library to share components.
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next`
-  and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo.
+- `@repo/ui`: a stub React component library to share components.
+- `@repo/eslint-config-custom`: `eslint` configurations (includes
+  `eslint-plugin-next` and `eslint-config-prettier`)
+- `@repo/tsconfig`: `tsconfig.json`s used throughout the monorepo.
 
 ### Install
 
 ```sh
-yarn install
+pnpm install
 ```
 
 ### Build
@@ -37,7 +37,7 @@ yarn install
 To build all apps and packages, run the following command:
 
 ```sh
-yarn run build
+pnpm build
 ```
 
 ### Develop
@@ -45,19 +45,19 @@ yarn run build
 To develop all apps and packages, run the following command:
 
 ```sh
-yarn run dev
+pnpm dev
 ```
 
 ### Production
 
 ```sh
-yarn run start
+pnpm start
 ```
 
 ### Run tests
 
 ```sh
-yarn run test
+pnpm test
 ```
 
 ### Run e2e tests
@@ -65,25 +65,25 @@ yarn run test
 For the first time, install Playwright browsers:
 
 ```sh
-npx playwright install
+pnpm exec playwright install
 ```
 
 Then:
 
 ```sh
-yarn run test:e2e
+pnpm test:e2e
 ```
 
 ### Lint
 
 ```sh
-yarn run lint
+pnpm lint
 ```
 
 ### To [install package](https://turbo.build/repo/docs/handbook/package-installation#addingremovingupgrading-packages) in workspace (`client` | `server`)
 
 ```sh
-yarn workspace <workspace> add <package>
+pnpm add <package> --filter=<workspace>
 ```
 
 ### To upgrade dependencies
@@ -91,13 +91,28 @@ yarn workspace <workspace> add <package>
 Check outdated deps:
 
 ```sh
-yarn outdated
+pnpm outdated
 ```
 
 Select which deps to upgrade:
 
 ```sh
-yarn upgrade-interactive --latest
+pnpm update --interactive --latest
+```
+
+### Using the Chakra CLI to generate snippets/components/typings
+
+Use the [Chakra CLI](https://chakra-ui.com/docs/get-started/cli) to install
+snippets/components.
+
+```sh
+pnpm --filter=client chakra snippet add <snippet>
+```
+
+To generate typings use:
+
+```sh
+pnpm --filter=client chakra typegen src/utils/theme.ts
 ```
 
 ## Deployment
@@ -110,17 +125,17 @@ yarn upgrade-interactive --latest
 4. Override `BUILD COMMAND` with
    [command](https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependencies-of-matched-workspaces):
 
-```sh
-cd ../.. && turbo run build --filter={/apps/client}...
-```
+   ```sh
+   pnpm --filter=client chakra typegen src/utils/theme.ts && cd ../.. && turbo run build --filter=client
+   ```
 
-or
+   or
 
-```sh
-cd ../.. && npx turbo run build --scope=client --include-dependencies --no-deps
-```
+   ```sh
+   pnpm --filter=client chakra typegen src/utils/theme.ts && cd ../.. && npx turbo run build --scope=client --include-dependencies --no-deps
+   ```
 
-but the second one is apparently deprecated.
+   but the second one is apparently deprecated.
 
 5. Add `client environment variables`.
 
@@ -131,19 +146,19 @@ but the second one is apparently deprecated.
 3. Override `BUILD COMMAND` with
    [command](https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependencies-of-matched-workspaces):
 
-```sh
-cd ../.. && turbo run build --filter={/apps/server}...
-```
+   ```sh
+   cd ../.. && turbo run build --filter={/apps/server}...
+   ```
 
-or
+   or
 
-```sh
-cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
-```
+   ```sh
+   cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
+   ```
 
 4. Add `HEALTH CHECK PATH` to `/ping`.
-5. Add `server environment vartiables`.
-6. Add `NODE_VERSION` with desired version (node >=16.0.0) to environment
+5. Add `server environment variables`.
+6. Add `NODE_VERSION` with desired version (node >=22.0.0) to environment
    variables. Otherwise it defaults to `14.17.5`.
 7. Add secret/cert files with new
    [generated private/public keys](https://rietta.com/blog/openssl-generating-rsa-key-from-command/).
@@ -169,7 +184,7 @@ cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
 ## ✏️ TODO
 
 - ~~Add more tests~~
-- Add more tests for testing vaults
+- ~~Add more tests for testing vaults~~
 - ~~Add demo image for README.md~~
 - Add 404 page
 - Add github actions for deployments
@@ -178,4 +193,3 @@ cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
 ## Acknowledgements
 
 - [TomDoesTech](https://www.youtube.com/watch?v=wHVzfjrD1Xg)
-- [Leo Roese](https://www.youtube.com/watch?v=YQLw5kJ1yrQ)

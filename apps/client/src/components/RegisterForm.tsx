@@ -1,21 +1,12 @@
-import {
-  Button,
-  Divider,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Heading,
-  Input,
-  Text,
-} from '@chakra-ui/react';
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { Field, Flex, Heading, Input, Separator, Text } from '@chakra-ui/react';
+import { type Dispatch, type MouseEvent, type SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
 import useRegister from '../hooks/useRegister';
 import { hashPassword } from '../utils/crypto';
 import FormWrapper from './FormWrapper';
-import PasswordInput from './PasswordInput';
+import { Button } from './ui/button';
+import { PasswordInput } from './ui/password-input';
 
 interface RegisterFormProps {
   setStep: Dispatch<SetStateAction<'register' | 'vault' | 'login'>>;
@@ -27,9 +18,15 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<{ email: string; password: string; hashedPassword: string }>();
+    watch,
+  } = useForm<{
+    email: string;
+    password: string;
+    hashedPassword: string;
+    confirmPassword: string;
+  }>();
 
-  const { register: registerUser, isLoading } = useRegister({
+  const { register: registerUser, isPending } = useRegister({
     setStep,
     setVaultKey,
   });
@@ -43,10 +40,16 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)} initialX={-100}>
-      <Heading data-testid="form-heading">Register</Heading>
+      <Heading
+        data-testid="form-heading"
+        size={['3xl', '4xl']}
+        letterSpacing="normal"
+      >
+        Register
+      </Heading>
 
-      <FormControl mt="4" isInvalid={!!errors.email}>
-        <FormLabel htmlFor="email">Email</FormLabel>
+      <Field.Root invalid={!!errors.email}>
+        <Field.Label htmlFor="email">Email</Field.Label>
         <Input
           id="email"
           placeholder="Email"
@@ -59,55 +62,62 @@ const RegisterForm = ({ setStep, setVaultKey }: RegisterFormProps) => {
             },
           })}
         />
+        <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
+      </Field.Root>
 
-        <FormErrorMessage>
-          {errors.email && errors.email.message}
-        </FormErrorMessage>
-      </FormControl>
-
-      <FormControl mt="4" isInvalid={!!errors.password}>
-        <FormLabel htmlFor="password">Password</FormLabel>
+      <Field.Root invalid={!!errors.password}>
+        <Field.Label htmlFor="password">Password</Field.Label>
         <PasswordInput
           id="password"
           placeholder="Password"
-          name="password"
           data-testid="password-input"
-          register={register}
-          rules={{
+          {...register('password', {
             required: 'Password is required',
             minLength: {
-              value: 6,
-              message: 'Password must be at least 6 characters long',
+              value: 8,
+              message: 'Password must be at least 8 characters long',
             },
-          }}
+          })}
         />
-        <FormErrorMessage>
-          {errors.password && errors.password.message}
-        </FormErrorMessage>
-      </FormControl>
+        <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
+      </Field.Root>
 
-      <Flex direction="column" mt="4">
-        <Button
-          type="submit"
-          variant="gradient"
-          data-testid="register-btn"
-          isLoading={isLoading}
-          size="lg"
-        >
-          Register
-        </Button>
-      </Flex>
+      <Field.Root invalid={!!errors.confirmPassword}>
+        <Field.Label htmlFor="password">Confirm Password</Field.Label>
+        <PasswordInput
+          id="confirmPassword"
+          placeholder="Confirm Password"
+          data-testid="confirm-password-input"
+          {...register('confirmPassword', {
+            required: 'Confirm password is required',
+            validate: (val) =>
+              val === watch('password') || 'Passwords must match',
+          })}
+        />
+        <Field.ErrorText>{errors.confirmPassword?.message}</Field.ErrorText>
+      </Field.Root>
 
-      <Flex direction="column" alignItems="start" gap="4" mt="5">
-        <Divider mt="6" mb="6" />
+      <Button
+        type="submit"
+        variant="gradient"
+        data-testid="register-btn"
+        loading={isPending}
+        size="xl"
+      >
+        Register
+      </Button>
+
+      <Flex direction="column" gap="5">
+        <Separator mt="6" />
         <Text fontSize="md" as="b">
           Already have an account?
         </Text>
         <Button
+          alignSelf="self-start"
           variant="outline"
           data-testid="go-to-login-btn"
           onClick={goToLogin}
-          size="lg"
+          size="xl"
         >
           Login
         </Button>

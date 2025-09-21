@@ -12,12 +12,11 @@
     "inlineSources": false,
     "isolatedModules": true,
     "lib": [
-      "ES2021",
+      "ESNext",
       "DOM",
       "DOM.Iterable"
     ],
     "module": "esnext",
-    "moduleResolution": "node",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,

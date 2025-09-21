@@ -1,0 +1,19 @@
+{
+  "extends": "@repo/tsconfig/server.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "removeComments": true
+  },
+  "include": [
+    "src",
+  ],
+  "exclude": [
+    "node_modules",
+    ".turbo",
+    "coverage",
+    "dist",
+    "src/**/*.test.ts",
+    "src/tests/*",
+  ]
+}

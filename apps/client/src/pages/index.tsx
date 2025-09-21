@@ -11,7 +11,7 @@ import Nav from '../components/Nav';
 import RegisterForm from '../components/RegisterForm';
 import Vault from '../components/Vault';
 import { loadVault, loadVaultKey } from '../utils/storage';
-import { VaultItem } from '../utils/types';
+import { type VaultItem } from '../utils/types';
 
 const Home: NextPage = () => {
   const [step, setStep] = useState<'login' | 'register' | 'vault'>('login');
@@ -38,6 +38,7 @@ const Home: NextPage = () => {
       align="center"
       h="100%"
       overflowX="hidden"
+      overflowY={['scroll', 'hidden']}
     >
       <Head>
         <title>🔒 Password Vault</title>
@@ -55,12 +56,10 @@ const Home: NextPage = () => {
         maxW="100%"
         w="100%"
         h="100%"
+        zIndex="1"
         direction="column"
         justify="start"
         align="center"
-        backdropFilter="auto"
-        backdropBlur="2px"
-        _dark={{ backdropBlur: '6px' }}
       >
         {step === 'register' && (
           <RegisterForm setStep={setStep} setVaultKey={setVaultKey} />

@@ -1,23 +1,15 @@
-import {
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Icon,
-  Input,
-  Text,
-} from '@chakra-ui/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Field, Flex, Heading, Icon, Input, Text } from '@chakra-ui/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FaGrinBeamSweat } from 'react-icons/fa';
-import useSaveVault from 'src/hooks/useSaveVault';
 
+import useSaveVault from '../hooks/useSaveVault';
 import { encryptVault } from '../utils/crypto';
 import { storeVault } from '../utils/storage';
-import { VaultItem } from '../utils/types';
+import { type VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
-import PasswordInput from './PasswordInput';
+import { Button } from './ui/button';
+import { PasswordInput } from './ui/password-input';
 
 interface VaultProps {
   vault: VaultItem[];
@@ -36,13 +28,14 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
     name: 'vault',
   });
 
-  const { save, isLoading } = useSaveVault();
+  const { save, isPending } = useSaveVault();
 
   return (
     <FormWrapper
-      maxW="container.lg"
-      mt="12"
-      pt="12"
+      maxW="6xl"
+      mt="16"
+      pt={['6', '10']}
+      gap={['2', '5']}
       overflowX="hidden"
       onSubmit={handleSubmit(({ vault }) => {
         const encryptedVault = encryptVault({
@@ -55,7 +48,13 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
         save({ encryptedVault });
       })}
     >
-      <Heading data-testid="vault-heading">Vault</Heading>
+      <Heading
+        data-testid="vault-heading"
+        size={['3xl', '4xl']}
+        letterSpacing="normal"
+      >
+        Vault
+      </Heading>
 
       {fields.length < 1 && (
         <Flex my="12" direction="column" align="center" gap="5">
@@ -65,86 +64,95 @@ const Vault = ({ vault = [], vaultKey = '' }: VaultProps) => {
             color="orange.400"
             _dark={{ color: 'yellow.400' }}
           />
-          <Text>Your vault is empty. Maybe Add something?</Text>
+          <Text textAlign="center">
+            Your vault is empty. Maybe Add something?
+          </Text>
         </Flex>
       )}
-
       <AnimatePresence>
         {fields.map((field, index) => {
           return (
-            <Flex
+            <motion.div
               key={field.id}
-              direction={['column', 'row']}
-              align="flex-end"
-              my="4"
-              gap="3"
-              as={motion.div}
               initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 100 }}
             >
-              <FormControl>
-                <FormLabel htmlFor="website">Website</FormLabel>
-                <Input
-                  type="url"
-                  id="website"
-                  placeholder="Website"
-                  {...register(`vault.${index}.website`, {
-                    required: 'Website is required',
-                  })}
-                />
-              </FormControl>
-
-              <FormControl ml="2">
-                <FormLabel htmlFor="username">Username</FormLabel>
-                <Input
-                  id="username"
-                  placeholder="Username"
-                  {...register(`vault.${index}.username`, {
-                    required: 'Username is required',
-                  })}
-                />
-              </FormControl>
-
-              <FormControl ml="2">
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <PasswordInput
-                  id="password"
-                  placeholder="Password"
-                  name={`vault.${index}.password`}
-                  register={register}
-                  rules={{ required: 'Password is required' }}
-                />
-              </FormControl>
-
-              <Button
-                bg="red.500"
-                color="white"
-                fontSize="2xl"
-                ml="2"
-                type="button"
-                onClick={() => remove(index)}
+              <Flex
+                direction={['column', 'row']}
+                align="flex-end"
+                my="4"
+                gap="3"
               >
-                -
-              </Button>
-            </Flex>
+                <Field.Root>
+                  <Field.Label htmlFor="website">Website</Field.Label>
+                  <Input
+                    type="url"
+                    id="website"
+                    placeholder="Website"
+                    data-testid={`website-input-${index}`}
+                    {...register(`vault.${index}.website`, {
+                      required: 'Website is required',
+                    })}
+                  />
+                </Field.Root>
+
+                <Field.Root ml="2">
+                  <Field.Label htmlFor="username">Username</Field.Label>
+                  <Input
+                    id="username"
+                    placeholder="Username"
+                    data-testid={`username-input-${index}`}
+                    {...register(`vault.${index}.username`, {
+                      required: 'Username is required',
+                    })}
+                  />
+                </Field.Root>
+
+                <Field.Root ml="2">
+                  <Field.Label htmlFor="password">Password</Field.Label>
+                  <PasswordInput
+                    id="password"
+                    placeholder="Password"
+                    data-testid={`password-input-${index}`}
+                    {...register(`vault.${index}.password`, {
+                      required: 'Password is required',
+                    })}
+                  />
+                </Field.Root>
+
+                <Button
+                  bg="red.500"
+                  color="white"
+                  fontSize="2xl"
+                  ml="2"
+                  type="button"
+                  onClick={() => remove(index)}
+                >
+                  -
+                </Button>
+              </Flex>
+            </motion.div>
           );
         })}
       </AnimatePresence>
+
       <Flex justifyContent="space-between" mt="4">
         <Button
           onClick={() => append({ website: '', username: '', password: '' })}
           variant="outline"
-          size="lg"
+          size="xl"
+          data-testid="add-vault-item-btn"
         >
           Add
         </Button>
 
         <Button
           type="submit"
-          isLoading={isLoading}
+          loading={isPending}
           variant="gradient"
-          size="lg"
+          size="xl"
+          data-testid="save-vault-btn"
         >
           Save Vault
         </Button>

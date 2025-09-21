@@ -1,71 +1,78 @@
-module.exports = {
-  env: {
-    browser: true,
-    node: true,
-  },
-  extends: [
-    'next',
-    'turbo',
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended', // Make sure this is always the last element in the array.
-  ],
-  plugins: ['import', 'simple-import-sort', 'prettier'],
-  settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
-    'import/resolver': {
-      typescript: {
-        alwaysTryTypes: true,
-        project: ['apps/*/tsconfig.json'],
+// import js from '@eslint/js';
+import importPlugin from 'eslint-plugin-import';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import turboPlugin from 'eslint-plugin-turbo';
+
+import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
+import tseslint from 'typescript-eslint';
+
+export default defineConfig(
+  eslint.configs.recommended,
+  eslintConfigPrettier,
+  importPlugin.flatConfigs.recommended,
+  importPlugin.flatConfigs.typescript,
+  tseslint.configs.recommendedTypeChecked,
+  tseslint.configs.stylisticTypeChecked,
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
+    plugins: {
+      turbo: turboPlugin,
+      importPlugin,
+      'simple-import-sort': simpleImportSort,
+    },
+    rules: {
+      // default
+      eqeqeq: 'error',
+      'no-console': 'warn',
+      'prefer-const': 'error',
+      //import
+      'import/no-named-as-default': 'off',
+      //typescript
+      '@typescript-eslint/ban-ts-comment': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-namespace': ['error', { allowDeclarations: true }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/no-namespace': [
+        'error',
+        {
+          allowDeclarations: true,
+        },
+      ],
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: {
+            attributes: false,
+            arguments: false,
+          },
+        },
+      ],
+      '@typescript-eslint/consistent-type-imports': [
+        'warn',
+        {
+          prefer: 'type-imports',
+          fixStyle: 'inline-type-imports',
+        },
+      ],
+      //simple-import-sort
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
+      //turbo
+      'turbo/no-undeclared-env-vars': 'error',
+    },
   },
-  rules: {
-    // default
-    eqeqeq: 'error',
-    'no-console': 'warn',
-    // react
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
-    'react/function-component-definition': [
-      2,
-      {
-        namedComponents: 'arrow-function',
-      },
-    ],
-    // next
-    '@next/next/no-html-link-for-pages': 'off',
-    // prettier
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
-    //typescript
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-namespace': ['error', { allowDeclarations: true }],
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
-      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-    ],
-    //simple-import-sort
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
-    //import
-    'import/no-named-as-default': 'off',
-  },
-  ignorePatterns: [
-    '**/*.js',
-    '**/*.json',
-    'node_modules',
-    'public',
-    'styles',
-    '.next',
-    'coverage',
-    'dist',
-    '.turbo',
-  ],
-};
+);

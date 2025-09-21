@@ -4,16 +4,7 @@ import { RiHeartsFill } from 'react-icons/ri';
 
 const MadeBy = () => {
   return (
-    <Flex
-      as="footer"
-      gap="1"
-      align="center"
-      justify="center"
-      w="100%"
-      backdropFilter="auto"
-      backdropBlur="2px"
-      _dark={{ backdropBlur: '6px' }}
-    >
+    <Flex as="footer" gap="1" align="center" justify="center" w="100%">
       <Text fontSize="xs" py="4">
         Made with
       </Text>

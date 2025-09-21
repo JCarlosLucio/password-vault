@@ -1,22 +1,13 @@
-import {
-  Button,
-  Divider,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Heading,
-  Input,
-  Text,
-} from '@chakra-ui/react';
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { Field, Flex, Heading, Input, Separator, Text } from '@chakra-ui/react';
+import { type Dispatch, type MouseEvent, type SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
-import useLogin from 'src/hooks/useLogin';
 
+import useLogin from '../hooks/useLogin';
 import { hashPassword } from '../utils/crypto';
-import { VaultItem } from '../utils/types';
+import { type VaultItem } from '../utils/types';
 import FormWrapper from './FormWrapper';
-import PasswordInput from './PasswordInput';
+import { Button } from './ui/button';
+import { PasswordInput } from './ui/password-input';
 
 interface LoginFormProps {
   setStep: Dispatch<SetStateAction<'register' | 'vault' | 'login'>>;
@@ -31,7 +22,7 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
     formState: { errors },
   } = useForm<{ email: string; password: string; hashedPassword: string }>();
 
-  const { login, isLoading } = useLogin({ setStep, setVault, setVaultKey });
+  const { login, isPending } = useLogin({ setStep, setVault, setVaultKey });
 
   const goToRegister = (_e: MouseEvent<HTMLButtonElement>) =>
     setStep('register');
@@ -43,10 +34,16 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)} initialX={100}>
-      <Heading data-testid="form-heading">Login</Heading>
+      <Heading
+        data-testid="form-heading"
+        size={['3xl', '4xl']}
+        letterSpacing="normal"
+      >
+        Login
+      </Heading>
 
-      <FormControl mt="4" isInvalid={!!errors.email}>
-        <FormLabel htmlFor="email">Email</FormLabel>
+      <Field.Root invalid={!!errors.email}>
+        <Field.Label htmlFor="email">Email</Field.Label>
         <Input
           id="email"
           placeholder="Email"
@@ -59,54 +56,47 @@ const LoginForm = ({ setStep, setVault, setVaultKey }: LoginFormProps) => {
             },
           })}
         />
-        <FormErrorMessage>
-          {errors.email && errors.email.message}
-        </FormErrorMessage>
-      </FormControl>
+        <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
+      </Field.Root>
 
-      <FormControl mt="4" isInvalid={!!errors.password}>
-        <FormLabel htmlFor="password">Password</FormLabel>
+      <Field.Root invalid={!!errors.password}>
+        <Field.Label htmlFor="password">Password</Field.Label>
         <PasswordInput
           id="password"
           placeholder="Password"
-          name="password"
           data-testid="password-input"
-          register={register}
-          rules={{
+          {...register('password', {
             required: 'Password is required',
             minLength: {
               value: 6,
               message: 'Password must be at least 6 characters long',
             },
-          }}
+          })}
         />
-        <FormErrorMessage>
-          {errors.password && errors.password.message}
-        </FormErrorMessage>
-      </FormControl>
+        <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
+      </Field.Root>
 
-      <Flex direction="column" mt="4">
-        <Button
-          type="submit"
-          variant="gradient"
-          data-testid="login-btn"
-          isLoading={isLoading}
-          size="lg"
-        >
-          Login
-        </Button>
-      </Flex>
+      <Button
+        type="submit"
+        variant="gradient"
+        data-testid="login-btn"
+        loading={isPending}
+        size="xl"
+      >
+        Login
+      </Button>
 
-      <Flex direction="column" alignItems="start" gap="4" mt="5">
-        <Divider mt="6" mb="6" />
+      <Flex direction="column" gap="5">
+        <Separator mt="6" />
         <Text fontSize="md" as="b">
           Don&apos;t have an account?
         </Text>
         <Button
+          alignSelf="self-start"
           variant="outline"
           data-testid="go-to-register-btn"
           onClick={goToRegister}
-          size="lg"
+          size="xl"
         >
           Register
         </Button>

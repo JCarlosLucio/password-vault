@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify';
+import { type FastifyInstance } from 'fastify';
 
 import { PORT } from './constants';
 import createServer from './utils/createServer';
@@ -7,7 +7,7 @@ import logger from './utils/logger';
 
 const gracefulShutdown = (signal: string, app: FastifyInstance) => {
   process.on(signal, async () => {
-    app.close();
+    await app.close();
     await disconnectFromDb();
     logger.info(`Goodbye, got signal ${signal}`);
     process.exit(0);
@@ -33,4 +33,4 @@ const main = async () => {
   }
 };
 
-main();
+void main();

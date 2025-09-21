@@ -2,7 +2,15 @@ import { Flex } from '@chakra-ui/react';
 
 const Background = () => {
   return (
-    <Flex pos="absolute" w="100%" h="100%" overflow="hidden" zIndex={-1}>
+    <Flex
+      pos="absolute"
+      w="100%"
+      h="100%"
+      overflow="hidden"
+      zIndex="0"
+      filter="blur(2px)"
+      _dark={{ filter: 'blur(6px)' }}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="100%"

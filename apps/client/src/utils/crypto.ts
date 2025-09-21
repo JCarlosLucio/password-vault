@@ -3,7 +3,7 @@ import enc from 'crypto-js/enc-utf8';
 import pbkdf2 from 'crypto-js/pbkdf2';
 import sha256 from 'crypto-js/sha256';
 
-import { VaultItem } from './types';
+import { parseVaultData, type VaultItem } from './types';
 
 export const hashPassword = (password: string) => {
   return sha256(password).toString();
@@ -44,8 +44,8 @@ export const decryptVault = ({
   const decrypted = bytes.toString(enc);
 
   try {
-    return JSON.parse(decrypted).vault;
-  } catch (e) {
+    return parseVaultData(JSON.parse(decrypted)).vault;
+  } catch (_e) {
     return [];
   }
 };

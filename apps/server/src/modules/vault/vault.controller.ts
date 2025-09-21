@@ -1,5 +1,4 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
-import _ from 'lodash';
+import { type FastifyReply, type FastifyRequest } from 'fastify';
 
 import logger from '../../utils/logger';
 import { updateVault } from './vault.service';
@@ -12,12 +11,16 @@ export const updateVaultHandler = async (
   }>,
   reply: FastifyReply,
 ) => {
-  const userId = _.get(request, 'user._id');
-
   try {
+    const user = await request.jwtVerify<{
+      _id: string;
+      email: string;
+      iat: number;
+    }>();
+
     await updateVault({
       data: request.body.encryptedVault,
-      userId,
+      userId: user._id,
     });
 
     return reply.code(200).send('Vault updated');

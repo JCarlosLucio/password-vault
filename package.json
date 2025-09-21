@@ -1,40 +1,38 @@
 {
   "name": "password-vault",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "build": "turbo run build",
     "start": "turbo run start",
     "start:test": "turbo run start:test",
     "dev": "turbo run dev --parallel",
     "test": "turbo run test",
-    "test:e2e": "npx playwright test",
-    "lint": "turbo run lint",
+    "test:e2e": "pnpm exec playwright test",
+    "lint": "turbo run lint --continue",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "devDependencies": {
-    "@playwright/test": "^1.35.0",
-    "eslint-config-custom": "*",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
-    "prettier": "2.8.8",
+    "@playwright/test": "^1.55.0",
+    "@repo/eslint-config-custom": "workspace:*",
+    "@types/node": "^24.5.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
+    "prettier": "3.6.2",
     "turbo": "latest"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=22.x"
   },
-  "dependencies": {},
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "pnpm@10.17.0",
   "lint-staged": {
     "apps/**/*.{js,ts,jsx,tsx}": [
+      "prettier --write",
       "eslint --fix"
     ],
     "packages/ui/**/*.{js,ts,jsx,tsx}": [
+      "prettier --write",
       "eslint --fix"
     ],
     "*.json": [

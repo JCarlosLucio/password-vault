@@ -1,4 +1,8 @@
-import { FastifyError, FastifyInstance, FastifyPluginOptions } from 'fastify';
+import {
+  type FastifyError,
+  type FastifyInstance,
+  type FastifyPluginOptions,
+} from 'fastify';
 
 import { updateVaultHandler } from './vault.controller';
 
@@ -8,7 +12,7 @@ const vaultRoutes = (
   done: (e?: FastifyError) => void,
 ) => {
   // PUT /api/vault
-  app.put('/', { onRequest: [app.authenticate] }, updateVaultHandler);
+  app.put('/', updateVaultHandler);
 
   done();
 };

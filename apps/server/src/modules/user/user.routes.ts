@@ -1,4 +1,8 @@
-import { FastifyError, FastifyInstance, FastifyPluginOptions } from 'fastify';
+import {
+  type FastifyError,
+  type FastifyInstance,
+  type FastifyPluginOptions,
+} from 'fastify';
 
 import { loginHandler, registerUserHandler } from './user.controller';
 

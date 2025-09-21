@@ -2,11 +2,7 @@ import cookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import helmet from '@fastify/helmet';
 import jwt from '@fastify/jwt';
-import Fastify, {
-  FastifyInstance,
-  FastifyReply,
-  FastifyRequest,
-} from 'fastify';
+import Fastify, { type FastifyInstance } from 'fastify';
 import { readFileSync } from 'fs';
 
 import {
@@ -20,19 +16,6 @@ import userRoutes from '../modules/user/user.routes';
 import vaultRoutes from '../modules/vault/vault.routes';
 import logger from './logger';
 
-declare module 'fastify' {
-  export interface FastifyInstance {
-    authenticate: (
-      request: FastifyRequest<{
-        Body: {
-          encryptedVault: string;
-        };
-      }>,
-      reply: FastifyReply,
-    ) => Promise<never>;
-  }
-}
-
 const createServer = () => {
   const app: FastifyInstance = Fastify();
 
@@ -41,6 +24,7 @@ const createServer = () => {
   app.register(cors, {
     origin: CORS_ORIGIN,
     credentials: true,
+    methods: ['GET', 'HEAD', 'POST', 'PUT'],
   });
 
   app.register(jwt, {
@@ -59,23 +43,7 @@ const createServer = () => {
     parseOptions: {},
   });
 
-  app.decorate(
-    'authenticate',
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      try {
-        const user = await request.jwtVerify<{
-          _id: string;
-        }>();
-
-        request.user = user;
-      } catch (e) {
-        logger.error(e, 'authentication error');
-        return reply.send(e);
-      }
-    },
-  );
-
-  app.get('/ping', async () => {
+  app.get('/ping', () => {
     return 'pong';
   });
   app.register(userRoutes, { prefix: 'api/users' });

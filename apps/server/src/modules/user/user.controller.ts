@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { type FastifyReply, type FastifyRequest } from 'fastify';
 
 import { COOKIE_DOMAIN, IS_PRODUCTION } from '../../constants';
 import logger from '../../utils/logger';
@@ -37,7 +37,7 @@ export const registerUserHandler = async (
       path: '/',
       secure: IS_PRODUCTION,
       httpOnly: true,
-      sameSite: 'none',
+      sameSite: IS_PRODUCTION ? 'none' : 'lax',
     });
 
     return reply.code(201).send({ accessToken, vault: vault.data, salt });
@@ -76,7 +76,7 @@ export const loginHandler = async (
       path: '/',
       secure: IS_PRODUCTION,
       httpOnly: true,
-      sameSite: 'none',
+      sameSite: IS_PRODUCTION ? 'none' : 'lax',
     });
 
     return reply
