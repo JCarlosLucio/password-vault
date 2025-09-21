@@ -129,12 +129,6 @@ pnpm --filter=client chakra typegen src/utils/theme.ts
    pnpm --filter=client chakra typegen src/utils/theme.ts && cd ../.. && turbo run build --filter=client
    ```
 
-   or
-
-   ```sh
-   pnpm --filter=client chakra typegen src/utils/theme.ts && cd ../.. && npx turbo run build --scope=client --include-dependencies --no-deps
-   ```
-
    but the second one is apparently deprecated.
 
 5. Add `client environment variables`.
