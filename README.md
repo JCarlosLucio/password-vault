@@ -184,7 +184,7 @@ pnpm --filter=client chakra typegen src/utils/theme.ts
 ## ✏️ TODO
 
 - ~~Add more tests~~
-- Add more tests for testing vaults
+- ~~Add more tests for testing vaults~~
 - ~~Add demo image for README.md~~
 - Add 404 page
 - Add github actions for deployments
