@@ -129,12 +129,6 @@ pnpm --filter=client chakra typegen src/utils/theme.ts
    pnpm --filter=client chakra typegen src/utils/theme.ts && cd ../.. && turbo run build --filter=client
    ```
 
-   or
-
-   ```sh
-   pnpm --filter=client chakra typegen src/utils/theme.ts && cd ../.. && npx turbo run build --scope=client --include-dependencies --no-deps
-   ```
-
    but the second one is apparently deprecated.
 
 5. Add `client environment variables`.
@@ -143,24 +137,25 @@ pnpm --filter=client chakra typegen src/utils/theme.ts
 
 1. Link github repo to [Render](https://render.com/).
 2. Set `ROOT DIRECTORY` as `apps/server`.
-3. Override `BUILD COMMAND` with
-   [command](https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependencies-of-matched-workspaces):
+3. Override `BUILD COMMAND`:
 
    ```sh
-   cd ../.. && turbo run build --filter={/apps/server}...
+   pnpm install --filter=server && pnpm dlx turbo run build --filter=server...
    ```
 
-   or
+4. Override `START COMMAND`:
 
    ```sh
-   cd ../.. && npx turbo run build --scope=server --include-dependencies --no-deps
+   pnpm --filter=server start
    ```
 
-4. Add `HEALTH CHECK PATH` to `/ping`.
-5. Add `server environment variables`.
-6. Add `NODE_VERSION` with desired version (node >=22.0.0) to environment
-   variables. Otherwise it defaults to `14.17.5`.
-7. Add secret/cert files with new
+5. Add `HEALTH CHECK PATH` to `/ping`.
+6. Add `server environment variables`.
+7. Add `NODE_VERSION` with desired version (node >=22.0.0) to environment
+   variables. Otherwise it
+   [defaults](https://render.com/docs/node-version#history-of-default-nodejs-versions)
+   to `22.16.0`.
+8. Add secret/cert files with new
    [generated private/public keys](https://rietta.com/blog/openssl-generating-rsa-key-from-command/).
 
 ## 📖 Lessons Learned
