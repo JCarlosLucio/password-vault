@@ -23,7 +23,7 @@
     "turbo": "latest"
   },
   "engines": {
-    "node": ">=22.x"
+    "node": ">=24.x"
   },
   "packageManager": "pnpm@10.17.0",
   "lint-staged": {
