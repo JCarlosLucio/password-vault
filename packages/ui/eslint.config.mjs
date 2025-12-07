@@ -1,4 +1,4 @@
-import reactConfig from '@repo/eslint-config-custom/react.js';
+import reactConfig from '@repo/eslint-config-custom/react-js';
 import { defineConfig } from 'eslint/config';
 
 /** @type {import("eslint").Linter.Config} */
