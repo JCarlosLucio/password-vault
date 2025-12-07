@@ -1,10 +1,15 @@
-import nextPlugin from '@next/eslint-plugin-next';
+import nextFlatConfig from '@next/eslint-plugin-next';
 import { defineConfig } from 'eslint/config';
 
 import baseConfig from './index.js';
 
+/**
+ * A custom ESLint configuration for libraries that use Next.js.
+ *
+ * @type {import("eslint").Linter.Config[]}
+ * */
 export default defineConfig([
-  nextPlugin.flatConfig.recommended,
+  nextFlatConfig.configs.recommended,
   {
     extends: [baseConfig],
     rules: {

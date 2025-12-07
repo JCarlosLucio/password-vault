@@ -1,20 +1,24 @@
-// import js from '@eslint/js';
+import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import turboPlugin from 'eslint-plugin-turbo';
 
-import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
-import tseslint from 'typescript-eslint';
+import { configs as tseslint } from 'typescript-eslint';
 
+/**
+ * A shared ESLint configuration for the repository.
+ *
+ * @type {import("eslint").Linter.Config[]}
+ * */
 export default defineConfig(
-  eslint.configs.recommended,
+  js.configs.recommended,
   eslintConfigPrettier,
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
-  tseslint.configs.recommendedTypeChecked,
-  tseslint.configs.stylisticTypeChecked,
+  tseslint.recommendedTypeChecked,
+  tseslint.stylisticTypeChecked,
   {
     languageOptions: {
       parserOptions: {
