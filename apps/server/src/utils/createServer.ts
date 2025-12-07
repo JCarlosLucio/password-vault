@@ -1,7 +1,9 @@
 import cookie from '@fastify/cookie';
 import cors from '@fastify/cors';
+import { FastifyError } from '@fastify/error';
 import helmet from '@fastify/helmet';
 import jwt from '@fastify/jwt';
+import { mongoose } from '@typegoose/typegoose';
 import Fastify, { type FastifyInstance } from 'fastify';
 import { readFileSync } from 'fs';
 
@@ -56,6 +58,17 @@ const createServer = () => {
   app.setErrorHandler((error, _request, reply) => {
     logger.error(JSON.stringify(error, null, 2));
 
+    if (
+      !(error instanceof FastifyError) &&
+      !(error instanceof mongoose.mongo.MongoServerError)
+    ) {
+      return reply.code(500).send({
+        message: 'Internal Server Error',
+        error: 'Internal Server Error',
+        statusCode: 500,
+      });
+    }
+
     switch (error.name) {
       case 'ValidationError': {
         if (
@@ -70,7 +83,7 @@ const createServer = () => {
         break;
       }
       case 'MongoServerError': {
-        if (error.code.toString() === '11000') {
+        if (error.code?.toString() === '11000') {
           return reply.status(400).send({ message: 'Email already taken' });
         }
 
