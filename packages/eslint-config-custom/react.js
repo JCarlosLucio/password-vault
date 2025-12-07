@@ -3,6 +3,11 @@ import { defineConfig } from 'eslint/config';
 
 import baseConfig from './index.js';
 
+/**
+ * A custom ESLint configuration for libraries that use React.
+ *
+ * @type {import("eslint").Linter.Config[]}
+ * */
 export default defineConfig([
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat['jsx-runtime'],
