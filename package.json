@@ -11,7 +11,8 @@
     "test:e2e": "pnpm exec playwright test",
     "lint": "turbo run lint --continue",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "chakra-typegen": "pnpm --filter=client chakra typegen src/utils/theme.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
