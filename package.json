@@ -11,12 +11,13 @@
     "test:e2e": "pnpm exec playwright test",
     "lint": "turbo run lint --continue",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "chakra-typegen": "pnpm --filter=client chakra typegen src/utils/theme.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "@repo/eslint-config-custom": "workspace:*",
-    "@types/node": "^24.10.1",
+    "@types/node": "^25.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "3.7.4",
